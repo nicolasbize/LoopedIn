@@ -44,8 +44,10 @@ public class FPSPlayerController : MonoBehaviour {
             if (!characterController.isGrounded) {
                 moveDirection.y -= gravity * Time.deltaTime;
             }
-
             characterController.Move(moveDirection * Time.deltaTime);
+        }
+
+        if (Player.Instance.CanLookAround()) {
             rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);

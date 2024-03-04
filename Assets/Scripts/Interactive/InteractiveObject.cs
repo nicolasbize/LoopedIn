@@ -19,6 +19,10 @@ public abstract class InteractiveObject : MonoBehaviour
         highlightObject.gameObject.SetActive(false);
     }
 
+    public abstract bool CanInteract();
+
     public abstract void Interact();
+
+    public abstract string ActionName();
 
 }

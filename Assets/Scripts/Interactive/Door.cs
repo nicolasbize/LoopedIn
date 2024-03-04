@@ -18,4 +18,11 @@ public class Door : InteractiveObject {
         transform.eulerAngles = startRotation + (isOpened ? Vector3.up * 90 : Vector3.zero);
     }
 
+    public override bool CanInteract() {
+        return true;
+    }
+
+    public override string ActionName() {
+        return isOpened ? "close" : "open";
+    }
 }

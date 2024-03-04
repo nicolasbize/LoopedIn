@@ -25,7 +25,6 @@ public class CrosshairRaycasting : MonoBehaviour {
             currentInteractiveComponent.Interact();
         } else if (Input.GetKeyDown(KeyCode.E) && currentConversationalObject != null) {
             currentConversationalObject.Talk();
-            Debug.Log("Talk");
         }
 
         actionBackground.gameObject.SetActive(IsObjectInFocus());
@@ -49,7 +48,7 @@ public class CrosshairRaycasting : MonoBehaviour {
                     if (currentConversationalObject != null) {
                     }
                     currentConversationalObject = conversationalComponent;
-                    actionText.GetComponent<TextMeshProUGUI>().text = "E to Talk";
+                    actionText.GetComponent<TextMeshProUGUI>().text = "E to talk";
                 }
             } else if (currentConversationalObject != null) {
                 currentConversationalObject = null;
@@ -64,13 +63,13 @@ public class CrosshairRaycasting : MonoBehaviour {
         RaycastHit hit;
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, interactionDistance, ~ignoredLayer)) {
             if (hit.transform.TryGetComponent(out InteractiveObject interactiveComponent)) {
-                if (currentInteractiveComponent != interactiveComponent) {
+                if (interactiveComponent.CanInteract() && currentInteractiveComponent != interactiveComponent) {
                     if (currentInteractiveComponent != null) {
                         currentInteractiveComponent.StopHighlight();
                     }
                     currentInteractiveComponent = interactiveComponent;
                     interactiveComponent.Highlight();
-                    actionText.GetComponent<TextMeshProUGUI>().text = "E to Interact";
+                    actionText.GetComponent<TextMeshProUGUI>().text = "E to " + interactiveComponent.ActionName();
                 }
             } else if (currentInteractiveComponent != null) {
                 currentInteractiveComponent.StopHighlight();
