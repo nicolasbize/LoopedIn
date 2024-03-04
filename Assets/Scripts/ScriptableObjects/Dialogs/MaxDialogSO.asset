@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e918091226193bd4bb98c14667fa94ff, type: 3}
-  m_Name: JohnDialogSO
+  m_Name: MaxDialogSO
   m_EditorClassIdentifier: 
-  npcText: 
-  playerOptions: []
+  greeting: I don't want to talk right now.
+  branches: []

@@ -12,6 +12,11 @@ public class Character : ConversationalObject {
     private bool isTalking = false;
 
     void Start() {
+        StartCoroutine(InitializeAnimation());
+    }
+
+    IEnumerator InitializeAnimation() {
+        yield return new WaitForSeconds(Random.Range(0.0f, 1.0f));
         humanoid.GetComponent<Animator>().SetBool("IsSitting", isSitting);
     }
 

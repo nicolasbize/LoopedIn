@@ -10,7 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e918091226193bd4bb98c14667fa94ff, type: 3}
-  m_Name: StudentDialogSO
+  m_Name: BenDialogSO
   m_EditorClassIdentifier: 
-  npcText: I don't want to talk right now
-  playerOptions: []
+  greeting: What do you want?
+  branches:
+  - question: What is this place?
+    response: The time travel agency.
+    branches: []
+  - question: What's your name?
+    response: Ben, we've been hanging out for years
+    branches: []

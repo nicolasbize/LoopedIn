@@ -5,6 +5,14 @@ using UnityEngine;
 [CreateAssetMenu()]
 public class DialogSO : ScriptableObject
 {
-    public string npcText;
-    public PartialDialogSO[] playerOptions;
+    public string greeting;
+    public Branch[] branches;
+
+    [System.Serializable]
+    public class Branch {
+        public string question;
+        public string response;
+        public Branch[] branches;
+    }
+
 }
