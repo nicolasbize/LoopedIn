@@ -17,9 +17,6 @@ public class FPSPlayerController : MonoBehaviour {
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
 
-    [HideInInspector]
-    public bool canMove = true;
-
     void Start() {
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
@@ -27,27 +24,28 @@ public class FPSPlayerController : MonoBehaviour {
     }
 
     void Update() {
-        Vector3 forward = transform.TransformDirection(Vector3.forward);
-        Vector3 right = transform.TransformDirection(Vector3.right);
-        
-        bool isRunning = Input.GetKey(KeyCode.LeftShift);
-        float curSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Vertical") : 0;
-        float curSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal") : 0;
-        float movementDirectionY = moveDirection.y;
-        moveDirection = (forward * curSpeedX) + (right * curSpeedY);
+        if (Player.Instance.CanMove()) {
 
-        if (Input.GetButton("Jump") && canMove && characterController.isGrounded) {
-            moveDirection.y = jumpSpeed;
-        } else {
-            moveDirection.y = movementDirectionY;
-        }
+            Vector3 forward = transform.TransformDirection(Vector3.forward);
+            Vector3 right = transform.TransformDirection(Vector3.right);
 
-        if (!characterController.isGrounded) {
-            moveDirection.y -= gravity * Time.deltaTime;
-        }
+            bool isRunning = Input.GetKey(KeyCode.LeftShift);
+            float curSpeedX = (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Vertical");
+            float curSpeedY = (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal");
+            float movementDirectionY = moveDirection.y;
+            moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
-        characterController.Move(moveDirection * Time.deltaTime);
-        if (canMove) {
+            if (Input.GetButton("Jump") && characterController.isGrounded) {
+                moveDirection.y = jumpSpeed;
+            } else {
+                moveDirection.y = movementDirectionY;
+            }
+
+            if (!characterController.isGrounded) {
+                moveDirection.y -= gravity * Time.deltaTime;
+            }
+
+            characterController.Move(moveDirection * Time.deltaTime);
             rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);

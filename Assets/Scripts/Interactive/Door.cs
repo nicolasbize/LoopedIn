@@ -8,7 +8,7 @@ public class Door : InteractiveObject {
     private bool isOpened = false;
     private Vector3 startRotation;
 
-    private void Start() {
+    private new void Start() {
         base.Start();
         startRotation = transform.eulerAngles;
     }
