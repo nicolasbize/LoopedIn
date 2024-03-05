@@ -15,6 +15,13 @@ public class Player : MonoBehaviour
         public Character targetDialog;
     }
 
+    public event EventHandler<OnStartThinkingEventArgs> OnStartThinking;
+    public class OnStartThinkingEventArgs : EventArgs {
+        public string thought;
+    }
+
+    public event EventHandler OnStartSmilePuzzle;
+    public event EventHandler OnStateChange;
 
     public static Player Instance;
 
@@ -22,6 +29,8 @@ public class Player : MonoBehaviour
         Sitting,
         Moving,
         Talking,
+        Puzzling,
+        Thinking,
     }
 
     private State state;
@@ -41,11 +50,12 @@ public class Player : MonoBehaviour
     }
 
     public bool CanLookAround() {
-        return state != State.Talking;
+        return state == State.Moving || state == State.Sitting;
     }
 
     public void StartTalking(Character target) {
         state = State.Talking;
+        OnStateChange?.Invoke(this, EventArgs.Empty);
         OnStartDialog?.Invoke(this, new OnStartDialogEventArgs() {
             targetDialog = target
         });
@@ -53,6 +63,7 @@ public class Player : MonoBehaviour
 
     public void StopTalking() {
         state = State.Moving;
+        OnStateChange?.Invoke(this, EventArgs.Empty);
         OnStopDialog?.Invoke(this, EventArgs.Empty);
     }
 
@@ -73,9 +84,33 @@ public class Player : MonoBehaviour
             currentChair = null;
         }
         state = State.Moving;
+        OnStateChange?.Invoke(this, EventArgs.Empty);
     }
 
-    internal void Pickup(Pickup.Type type) {
-        Debug.Log("here");
+    public void Pickup(Pickup.Type type) {
+        if (type == global::Pickup.Type.Briefcase) {
+            OnStartSmilePuzzle?.Invoke(this, EventArgs.Empty);
+            state = State.Puzzling;
+            OnStateChange?.Invoke(this, EventArgs.Empty);
+        }
     }
+
+    public void CompleteSmilePuzzle() {
+        GameLogic.Instance.Step = GameLogic.GameStep.LookingForSmilePicture;
+        StartThinking("OK, my target has something to do with a smile");
+    }
+
+    public void StartThinking(string thought) {
+        state = State.Thinking;
+        OnStateChange?.Invoke(this, EventArgs.Empty);
+        OnStartThinking?.Invoke(this, new OnStartThinkingEventArgs() {
+            thought = thought
+        });
+    }
+
+    public void StopThinking() {
+        state = State.Moving;
+        OnStateChange?.Invoke(this, EventArgs.Empty);
+    }
+
 }

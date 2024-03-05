@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static GameLogic;
 
 [CreateAssetMenu()]
 public class DialogSO : ScriptableObject
@@ -11,6 +12,7 @@ public class DialogSO : ScriptableObject
     [System.Serializable]
     public class Branch {
         public string question;
+        public GameStep currentStepRequirement;
         public string response;
         public Branch[] branches;
     }

@@ -21,6 +21,17 @@ public class FPSPlayerController : MonoBehaviour {
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        Player.Instance.OnStateChange += Player_OnStateChange;
+    }
+
+    private void Player_OnStateChange(object sender, System.EventArgs e) {
+        if (Player.Instance.GetState() == Player.State.Puzzling) {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        } else {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 
     void Update() {

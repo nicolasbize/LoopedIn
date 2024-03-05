@@ -20,6 +20,7 @@ public class Pickup : InteractiveObject {
 
     public override void Interact() {
         Player.Instance.Pickup(type);
+        Destroy(gameObject);
     }
     
 }

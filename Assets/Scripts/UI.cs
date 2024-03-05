@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UIElements;
 
 public class UI : MonoBehaviour
 {
@@ -10,9 +13,13 @@ public class UI : MonoBehaviour
     public Transform dialogText;
     public Transform dialogOptionPrefab;
     public Transform responsePanel;
+    public Transform thoughtPanel;
+    public Transform thoughtText;
 
     private bool isNpcTalking;
-    private bool isUserResponding;
+    private bool isPlayerResponding;
+    private bool isPlayerThinking;
+
     private DialogSO currentDialog;
     private DialogSO.Branch currentBranch = null;
 
@@ -27,15 +34,26 @@ public class UI : MonoBehaviour
 
     void Start()
     {
-        Player.Instance.OnStartDialog += Instance_OnStartDialog;
-        Player.Instance.OnStopDialog += Instance_OnStopDialog;
+        thoughtPanel.gameObject.SetActive(false);
+        dialogPanel.gameObject.SetActive(false);
+        responsePanel.gameObject.SetActive(false);
+
+        Player.Instance.OnStartDialog += Player_OnStartDialog;
+        Player.Instance.OnStopDialog += Player_OnStopDialog;
+        Player.Instance.OnStartThinking += Player_OnStartThinking;
+
     }
 
-    private void Instance_OnStopDialog(object sender, System.EventArgs e) {
+    private void Player_OnStartThinking(object sender, Player.OnStartThinkingEventArgs e) {
+        thoughtText.GetComponent<TextMeshProUGUI>().text = e.thought;
+        thoughtPanel.gameObject.SetActive(true);
+    }
+
+    private void Player_OnStopDialog(object sender, System.EventArgs e) {
         dialogPanel.gameObject.SetActive(false);
     }
 
-    private void Instance_OnStartDialog(object sender, Player.OnStartDialogEventArgs e) {
+    private void Player_OnStartDialog(object sender, Player.OnStartDialogEventArgs e) {
         InitiateConversation(e.targetDialog.dialog);
     }
 
@@ -47,8 +65,16 @@ public class UI : MonoBehaviour
     }
 
 
-    private void ShowResponseOptions() {
+    private DialogSO.Branch[] GetConversations() {
         DialogSO.Branch[] branches = (currentBranch == null ? currentDialog.branches : currentBranch.branches);
+        return branches.ToList().FindAll(b => {
+            return (b.currentStepRequirement == GameLogic.GameStep.None) ||
+            (b.currentStepRequirement == GameLogic.Instance.Step);
+        }).ToArray();
+    }
+
+    private void ShowResponseOptions() {
+        DialogSO.Branch[] branches = GetConversations();
         if (branches.Length > 0) {
             dialogPanel.gameObject.SetActive(false);
             foreach (Transform t in responsePanel.transform) {
@@ -74,12 +100,11 @@ public class UI : MonoBehaviour
             }
         }
         if (userOption > -1) {
-            if (currentBranch == null) {
-                currentBranch = currentDialog.branches[userOption];
-            } else {
-                currentBranch = currentBranch.branches[userOption];
+            DialogSO.Branch[] branches = GetConversations();
+            if (userOption < branches.Length) {
+                currentBranch = branches[userOption];
+                RefreshCharResponse();
             }
-            RefreshCharResponse();
         }
     }
 
@@ -90,12 +115,16 @@ public class UI : MonoBehaviour
     }
 
     private void Update() {
-        isUserResponding = responsePanel.gameObject.activeSelf;
+        isPlayerResponding = responsePanel.gameObject.activeSelf;
         isNpcTalking = dialogPanel.gameObject.activeSelf;
+        isPlayerThinking = thoughtPanel.gameObject.activeSelf;
         if (isNpcTalking && Input.GetMouseButtonDown(0)) {
             ShowResponseOptions();
-        } else if (isUserResponding) {
+        } else if (isPlayerResponding) {
             CheckForUserInput();
+        } else if (isPlayerThinking && Input.GetMouseButtonDown(0)) {
+            thoughtPanel.gameObject.SetActive(false);
+            Player.Instance.StopThinking();
         }
     }
 
