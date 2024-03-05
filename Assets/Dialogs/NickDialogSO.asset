@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e918091226193bd4bb98c14667fa94ff, type: 3}
+  m_Name: NickDialogSO
+  m_EditorClassIdentifier: 
+  greeting: Can I help you?
+  branches:
+  - question: You seem happy, what's your secret?
+    currentStepRequirement: 0
+    response: Happiness is a state of mind!
+    branches: []
+  - question: Do you know Dr Miller by any chance?
+    currentStepRequirement: 4
+    response: Who wants to know?
+    branches: []
