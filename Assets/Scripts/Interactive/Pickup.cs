@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Pickup : InteractiveObject {
 
+    public bool destroyAfterPickup;
+    public bool pickedUp;
+
     public enum Type {
         Briefcase,
+        PlayroomCodePuzzle,
     }
 
     public Type type;
@@ -15,12 +19,16 @@ public class Pickup : InteractiveObject {
     }
 
     public override bool CanInteract() {
-        return true;
+        return !pickedUp;
     }
 
     public override void Interact() {
         Player.Instance.Pickup(type);
-        Destroy(gameObject);
+        if (destroyAfterPickup) {
+            Destroy(gameObject);
+        } else {
+            pickedUp = true;
+        }
     }
     
 }

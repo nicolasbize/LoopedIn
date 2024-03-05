@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour
     }
 
     public event EventHandler OnStartSmilePuzzle;
+    public event EventHandler OnStartPlayroomPuzzle;
     public event EventHandler OnStateChange;
 
     public static Player Instance;
@@ -90,6 +92,10 @@ public class Player : MonoBehaviour
     public void Pickup(Pickup.Type type) {
         if (type == global::Pickup.Type.Briefcase) {
             OnStartSmilePuzzle?.Invoke(this, EventArgs.Empty);
+            state = State.Puzzling;
+            OnStateChange?.Invoke(this, EventArgs.Empty);
+        } else if(type == global::Pickup.Type.PlayroomCodePuzzle) {
+            OnStartPlayroomPuzzle?.Invoke(this, EventArgs.Empty);
             state = State.Puzzling;
             OnStateChange?.Invoke(this, EventArgs.Empty);
         }
