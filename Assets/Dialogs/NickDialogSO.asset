@@ -19,6 +19,10 @@ MonoBehaviour:
     response: Happiness is a state of mind!
     branches: []
   - question: Do you know Dr Miller by any chance?
-    currentStepRequirement: 4
-    response: Who wants to know?
-    branches: []
+    currentStepRequirement: 3
+    response: Of course, why are you asking?
+    branches:
+    - question: I need her to double check my math
+      currentStepRequirement: 0
+      response: 
+      branches: []

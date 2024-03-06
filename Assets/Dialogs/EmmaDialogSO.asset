@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e918091226193bd4bb98c14667fa94ff, type: 3}
+  m_Name: EmmaDialogSO
+  m_EditorClassIdentifier: 
+  greeting: Hey, what are you doing here?
+  branches:
+  - question: I need to run these numbers by Lucy, where can I find her?
+    currentStepRequirement: 4
+    stepUnlocked: 0
+    response: Oh she's not in the office today. What did you need?
+    branches:
+    - question: She asked me to do some research, maybe I can drop it off at her
+        desk?
+      currentStepRequirement: 0
+      stepUnlocked: 0
+      response: You need Level 3 clearance to get in and out of the lab facility
+      branches:
+      - question: Hi! Lucy gave me the code and said I could hang out here!
+        currentStepRequirement: 0
+        stepUnlocked: 0
+        response: Oh that's cool. My name is Emma, Chief Scientist.
+        branches:
+        - question: Nice to meet you! This is a sweet spot!
+          currentStepRequirement: 0
+          stepUnlocked: 0
+          response: It sure is, too bad all my friends took a vacation day today!
+          branches: []
+  - question: I need to run these numbers by Lucy, where can I find her?
+    currentStepRequirement: 4
+    stepUnlocked: 0
+    response: Of course... She's not in the office today. What did you need exactly?
+    branches:
+    - question: She asked me to do some research, maybe I can drop it off at her
+        desk?
+      currentStepRequirement: 0
+      stepUnlocked: 0
+      response: You need Level 3 clearance to get in and out of the lab facility
+      branches:
+      - question: Well YOU have clearance, could you let me in?
+        currentStepRequirement: 0
+        stepUnlocked: 5
+        response: No can't do! We can never be too cautious these days!
+        branches: []

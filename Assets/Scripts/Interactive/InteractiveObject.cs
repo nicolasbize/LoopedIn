@@ -5,6 +5,12 @@ using UnityEngine;
 
 public abstract class InteractiveObject : MonoBehaviour
 {
+    public enum InteractionType {
+        EKey,
+        MouseClick,
+    }
+
+    public InteractionType interactionType;
     public Transform highlightObject;
 
     public void Start() {

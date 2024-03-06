@@ -13,6 +13,7 @@ public class DialogSO : ScriptableObject
     public class Branch {
         public string question;
         public GameStep currentStepRequirement;
+        public GameStep stepUnlocked;
         public string response;
         public Branch[] branches;
     }

@@ -102,7 +102,7 @@ public class Player : MonoBehaviour
     }
 
     public void CompleteSmilePuzzle() {
-        GameLogic.Instance.Step = GameLogic.GameStep.LookingForSmilePicture;
+        GameLogic.Instance.Step = GameLogic.GameStep.SolvedBriefcaseClue;
         StartThinking("OK, my target has something to do with a smile");
     }
 

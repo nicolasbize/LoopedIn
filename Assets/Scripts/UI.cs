@@ -112,6 +112,9 @@ public class UI : MonoBehaviour
         responsePanel.gameObject.SetActive(false);
         dialogPanel.gameObject.SetActive(true);
         dialogText.GetComponent<TextMeshProUGUI>().text = currentBranch.response + " (click to continue)";
+        if (currentBranch.stepUnlocked != GameLogic.GameStep.None) {
+            GameLogic.Instance.Step = currentBranch.stepUnlocked;
+        }
     }
 
     private void Update() {

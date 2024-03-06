@@ -6,16 +6,18 @@ public class Pickup : InteractiveObject {
 
     public bool destroyAfterPickup;
     public bool pickedUp;
+    public string actionName;
 
     public enum Type {
         Briefcase,
         PlayroomCodePuzzle,
+        KeyCode,
     }
 
     public Type type;
 
     public override string ActionName() {
-        return "pick up";
+        return actionName;
     }
 
     public override bool CanInteract() {

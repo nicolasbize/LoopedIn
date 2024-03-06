@@ -21,13 +21,18 @@ public class CrosshairRaycasting : MonoBehaviour {
         CheckForInteractiveElement();
         CheckForConversationalObject();
 
-        if (Input.GetKeyDown(KeyCode.E) && currentInteractiveComponent != null) {
+        if (currentInteractiveComponent != null && IsInteractionRequested(currentInteractiveComponent)){
             currentInteractiveComponent.Interact();
         } else if (Input.GetKeyDown(KeyCode.E) && currentConversationalObject != null) {
             currentConversationalObject.Talk();
         }
 
         actionBackground.gameObject.SetActive(IsObjectInFocus());
+    }
+
+    private bool IsInteractionRequested(InteractiveObject interactive) {
+        return (interactive.interactionType == InteractiveObject.InteractionType.EKey && Input.GetKeyDown(KeyCode.E)) ||
+            (interactive.interactionType == InteractiveObject.InteractionType.MouseClick && Input.GetMouseButtonDown(0));
     }
 
     private bool IsObjectInFocus() {
@@ -48,7 +53,7 @@ public class CrosshairRaycasting : MonoBehaviour {
                     if (currentConversationalObject != null) {
                     }
                     currentConversationalObject = conversationalComponent;
-                    actionText.GetComponent<TextMeshProUGUI>().text = "E to talk";
+                    actionText.GetComponent<TextMeshProUGUI>().text = "Press E to talk";
                 }
             } else if (currentConversationalObject != null) {
                 currentConversationalObject = null;
@@ -69,7 +74,11 @@ public class CrosshairRaycasting : MonoBehaviour {
                     }
                     currentInteractiveComponent = interactiveComponent;
                     interactiveComponent.Highlight();
-                    actionText.GetComponent<TextMeshProUGUI>().text = "E to " + interactiveComponent.ActionName();
+                    string hintText = "Press E to " + interactiveComponent.ActionName();
+                    if (interactiveComponent.interactionType == InteractiveObject.InteractionType.MouseClick) {
+                        hintText = interactiveComponent.ActionName();
+                    }
+                    actionText.GetComponent<TextMeshProUGUI>().text = hintText;
                 }
             } else if (currentInteractiveComponent != null) {
                 currentInteractiveComponent.StopHighlight();

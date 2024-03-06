@@ -18,9 +18,9 @@ public class Plaque : InteractiveObject
     }
 
     public override void Interact() {
-        if (triggerStory && GameLogic.Instance.Step == GameLogic.GameStep.LookingForSmilePicture) {
+        if (triggerStory && GameLogic.Instance.Step == GameLogic.GameStep.SolvedBriefcaseClue) {
             Player.Instance.StartThinking(storyText);
-            GameLogic.Instance.Step = GameLogic.GameStep.AskingForDrMiller;
+            GameLogic.Instance.Step = GameLogic.GameStep.FoundMillerPortrait;
         } else {
             Player.Instance.StartThinking(text);
         }
