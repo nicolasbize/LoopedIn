@@ -7,14 +7,22 @@ public class Door : InteractiveObject {
 
     public bool isLocked = false;
     public Keycode lockPad;
+    public GameLogic.GameStep unlockedStep;
 
-    private bool isOpened = false;
+    public enum State { Closed, Open}
+
+    private State state = State.Closed;
     private Vector3 startRotation;
+
+    public State GetState() {
+        return state;
+    }
 
     private new void Start() {
         base.Start();
         startRotation = transform.eulerAngles;
         if (lockPad != null ) {
+            isLocked = true;
             lockPad.OnSuccessCodeEntered += LockPad_OnSuccessCodeEntered;
         }
     }
@@ -24,13 +32,14 @@ public class Door : InteractiveObject {
     }
 
     public void Unlock() {
+        state = State.Open;
         isLocked = false;
         Interact();
     }
 
     public override void Interact() {
-        isOpened = !isOpened;
-        transform.eulerAngles = startRotation + (isOpened ? Vector3.up * 90 : Vector3.zero);
+        state = (state == State.Open) ? State.Closed : State.Open;
+        transform.eulerAngles = startRotation + (state == State.Open ? Vector3.up * 90 : Vector3.zero);
     }
 
     public override bool CanInteract() {
@@ -38,6 +47,6 @@ public class Door : InteractiveObject {
     }
 
     public override string ActionName() {
-        return isOpened ? "close" : "open";
+        return state == State.Open ? "close" : "open";
     }
 }

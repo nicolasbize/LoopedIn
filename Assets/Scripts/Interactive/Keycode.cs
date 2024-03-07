@@ -54,7 +54,7 @@ public class Keycode : MonoBehaviour
                 pulseDuration = 1f;
                 pulseMaterial = successColorMaterial;
                 if (stepAfterUnlock != GameLogic.GameStep.None) {
-                    GameLogic.Instance.Step = stepAfterUnlock;
+                    GameLogic.Instance.SetStep(stepAfterUnlock);
                 }
             } else {
                 OnErrorCodeEntered?.Invoke(this, EventArgs.Empty);

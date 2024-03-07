@@ -36,7 +36,7 @@ MonoBehaviour:
           response: It sure is, too bad all my friends took a vacation day today!
           branches: []
   - question: I need to run these numbers by Lucy, where can I find her?
-    currentStepRequirement: 4
+    currentStepRequirement: 0
     stepUnlocked: 0
     response: Of course... She's not in the office today. What did you need exactly?
     branches:

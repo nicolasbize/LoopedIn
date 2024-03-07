@@ -47,8 +47,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 596ebafe7c44a9d488e47c836db71303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionType: 0
   highlightObject: {fileID: 6653854463516696656}
   destroyAfterPickup: 1
+  pickedUp: 0
+  actionName: pick up
   type: 0
 --- !u!65 &3800614781182875404
 BoxCollider:

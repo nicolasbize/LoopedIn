@@ -16,7 +16,8 @@ public class PlayroomCodePuzzle : MonoBehaviour
     }
 
     private void Update() {
-        if (Input.GetMouseButtonDown(0)) {
+        bool isActive = hintCanvas.gameObject.activeSelf;
+        if (isActive  && Input.GetMouseButtonDown(0)) {
             hintCanvas.gameObject.SetActive(false);
             Player.Instance.StopThinking();
         }

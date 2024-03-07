@@ -11,7 +11,7 @@ public class FPSPlayerController : MonoBehaviour {
     public float gravity = 20.0f;
     public Camera playerCamera;
     public float lookSpeed = 2.0f;
-    public float lookXLimit = 45.0f;
+    public float lookXLimit = 55.0f;
 
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;

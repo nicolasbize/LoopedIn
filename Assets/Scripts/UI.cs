@@ -67,10 +67,11 @@ public class UI : MonoBehaviour
 
     private DialogSO.Branch[] GetConversations() {
         DialogSO.Branch[] branches = (currentBranch == null ? currentDialog.branches : currentBranch.branches);
-        return branches.ToList().FindAll(b => {
+        DialogSO.Branch[] filteredBranches = branches.ToList().FindAll(b => {
             return (b.currentStepRequirement == GameLogic.GameStep.None) ||
             (b.currentStepRequirement == GameLogic.Instance.Step);
         }).ToArray();
+        return filteredBranches;
     }
 
     private void ShowResponseOptions() {
@@ -113,7 +114,7 @@ public class UI : MonoBehaviour
         dialogPanel.gameObject.SetActive(true);
         dialogText.GetComponent<TextMeshProUGUI>().text = currentBranch.response + " (click to continue)";
         if (currentBranch.stepUnlocked != GameLogic.GameStep.None) {
-            GameLogic.Instance.Step = currentBranch.stepUnlocked;
+            GameLogic.Instance.SetStep(currentBranch.stepUnlocked);
         }
     }
 

@@ -313,6 +313,8 @@ MonoBehaviour:
   humanoid: {fileID: 1606080442518716297}
   dialog: {fileID: 0}
   renderCamera: {fileID: 5605458278279332307}
+  dialogCanvas: {fileID: 4750642276057999423}
+  thoughtText: {fileID: 7915378508963858818}
 --- !u!136 &3338662515314426682
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -1,9 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameLogic : MonoBehaviour
 {
+    
+    public event EventHandler<OnStepChangeEventArgs> OnStepChange;
+    public class OnStepChangeEventArgs : EventArgs {
+        public GameStep step;
+    }
+
     public Transform roofToEnable;
 
     public static GameLogic Instance;
@@ -27,10 +34,17 @@ public class GameLogic : MonoBehaviour
 
     }
 
-    public GameStep Step;
+    public GameStep Step { get; private set; }
 
     private void Awake() {
         Instance = this;
+    }
+
+    public void SetStep(GameStep step) {
+        this.Step = step;
+        OnStepChange?.Invoke(this, new OnStepChangeEventArgs() {
+            step = this.Step
+        });
     }
 
     // Start is called before the first frame update

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Character : ConversationalObject {
@@ -7,6 +8,8 @@ public class Character : ConversationalObject {
     public Transform humanoid;
     public DialogSO dialog;
     public Transform renderCamera;
+    public Transform dialogCanvas;
+    public Transform thoughtText;
 
     private float timeStartTalk = float.NegativeInfinity;
     private bool isTalking = false;
@@ -22,11 +25,21 @@ public class Character : ConversationalObject {
         }
     }
 
+    // back and forth exchange with player
     public override void Talk() {
         renderCamera.GetComponent<Camera>().enabled = true;
         timeStartTalk = Time.timeSinceLevelLoad;
         isTalking = true;
         Player.Instance.StartTalking(this);
+    }
+
+    public void ThinkOutLoud(string thought) {
+        thoughtText.GetComponent<TextMeshProUGUI>().text = thought;
+        dialogCanvas.gameObject.SetActive(true);
+    }
+
+    public void StopThinkingOutLoud() {
+        dialogCanvas.gameObject.SetActive(false);
     }
 
     private void Update() {

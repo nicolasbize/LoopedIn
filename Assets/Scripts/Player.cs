@@ -65,6 +65,7 @@ public class Player : MonoBehaviour
 
     public void StopTalking() {
         state = State.Moving;
+        Debug.Log("stop talking");
         OnStateChange?.Invoke(this, EventArgs.Empty);
         OnStopDialog?.Invoke(this, EventArgs.Empty);
     }
@@ -102,7 +103,7 @@ public class Player : MonoBehaviour
     }
 
     public void CompleteSmilePuzzle() {
-        GameLogic.Instance.Step = GameLogic.GameStep.SolvedBriefcaseClue;
+        GameLogic.Instance.SetStep(GameLogic.GameStep.SolvedBriefcaseClue);
         StartThinking("OK, my target has something to do with a smile");
     }
 
@@ -117,6 +118,7 @@ public class Player : MonoBehaviour
     public void StopThinking() {
         state = State.Moving;
         OnStateChange?.Invoke(this, EventArgs.Empty);
+        Debug.Log("stopped thinking");
     }
 
 }
