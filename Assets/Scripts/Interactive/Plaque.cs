@@ -7,7 +7,8 @@ public class Plaque : InteractiveObject
     public string text;
     [TextArea]
     public string storyText;
-    public bool triggerStory;
+    public GameLogic.GameStep triggerStep;
+    public GameLogic.GameStep executesStep;
 
     public override string ActionName() {
         return "read";
@@ -18,9 +19,9 @@ public class Plaque : InteractiveObject
     }
 
     public override void Interact() {
-        if (triggerStory && GameLogic.Instance.Step == GameLogic.GameStep.SolvedBriefcaseClue) {
+        if (triggerStep != GameLogic.GameStep.None && GameLogic.Instance.Step == triggerStep) {
             Player.Instance.StartThinking(storyText);
-            GameLogic.Instance.SetStep(GameLogic.GameStep.FoundMillerPortrait);
+            GameLogic.Instance.SetStep(executesStep);
         } else {
             Player.Instance.StartThinking(text);
         }

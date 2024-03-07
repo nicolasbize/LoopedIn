@@ -42,6 +42,7 @@ public class GameLogic : MonoBehaviour
 
     public void SetStep(GameStep step) {
         this.Step = step;
+        Debug.Log(step.ToString());
         OnStepChange?.Invoke(this, new OnStepChangeEventArgs() {
             step = this.Step
         });

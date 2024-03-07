@@ -49,7 +49,7 @@ public class CrosshairRaycasting : MonoBehaviour {
         RaycastHit hit;
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, interactionDistance, ~ignoredLayer)) {
             if (hit.transform.TryGetComponent(out ConversationalObject conversationalComponent)) {
-                if (currentConversationalObject != conversationalComponent) {
+                if (conversationalComponent.CanInteract() && currentConversationalObject != conversationalComponent) {
                     if (currentConversationalObject != null) {
                     }
                     currentConversationalObject = conversationalComponent;
@@ -79,6 +79,9 @@ public class CrosshairRaycasting : MonoBehaviour {
                         hintText = interactiveComponent.ActionName();
                     }
                     actionText.GetComponent<TextMeshProUGUI>().text = hintText;
+                } else if (!interactiveComponent.CanInteract() && currentInteractiveComponent == interactiveComponent) {
+                    currentInteractiveComponent.StopHighlight();
+                    currentInteractiveComponent = null;
                 }
             } else if (currentInteractiveComponent != null) {
                 currentInteractiveComponent.StopHighlight();

@@ -7,6 +7,7 @@ public class ClipManager : MonoBehaviour
 {
     public GameLogic.GameStep triggerStep;
     public GameLogic.GameStep executesStep;
+    public Character[] charactersInvolved;
 
     private int currentStep;
     private float clipStartTime = float.NegativeInfinity;
@@ -15,6 +16,9 @@ public class ClipManager : MonoBehaviour
     private void Start() {
         GameLogic.Instance.OnStepChange += GameLogic_OnStepChange;
         clips = GetComponents<BaseClip>();
+        foreach (Character character in charactersInvolved) {
+            character.Lock();
+        }
     }
 
     private void GameLogic_OnStepChange(object sender, GameLogic.OnStepChangeEventArgs e) {
@@ -29,11 +33,19 @@ public class ClipManager : MonoBehaviour
         PlayNextStep();
     }
 
+    private void StopMovie() {
+        foreach (Character character in charactersInvolved) {
+            character.Unlock();
+        }
+    }
+
     private void PlayNextStep() {
         currentStep += 1;
         if (currentStep < clips.Length) {
             clips[currentStep].OnClipFinished += ClipManager_OnClipFinished;
             clips[currentStep].Play();
+        } else {
+            StopMovie();
         }
     }
 

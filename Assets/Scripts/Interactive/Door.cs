@@ -32,9 +32,11 @@ public class Door : InteractiveObject {
     }
 
     public void Unlock() {
-        state = State.Open;
         isLocked = false;
         Interact();
+        if (unlockedStep != GameLogic.GameStep.None ) {
+            GameLogic.Instance.SetStep(unlockedStep);
+        }
     }
 
     public override void Interact() {

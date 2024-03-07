@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
         Talking,
         Puzzling,
         Thinking,
+        Typing,
     }
 
     private State state;
@@ -52,7 +53,7 @@ public class Player : MonoBehaviour
     }
 
     public bool CanLookAround() {
-        return state == State.Moving || state == State.Sitting;
+        return state == State.Moving || state == State.Sitting || state == State.Typing;
     }
 
     public void StartTalking(Character target) {
@@ -119,6 +120,11 @@ public class Player : MonoBehaviour
         state = State.Moving;
         OnStateChange?.Invoke(this, EventArgs.Empty);
         Debug.Log("stopped thinking");
+    }
+
+    public void StartTyping() {
+        state = State.Typing;
+        OnStateChange?.Invoke(this, EventArgs.Empty);
     }
 
 }

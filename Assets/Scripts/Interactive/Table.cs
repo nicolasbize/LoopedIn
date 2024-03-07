@@ -11,7 +11,8 @@ public class Table : InteractiveObject {
     }
 
     public override bool CanInteract() {
-        return Player.Instance.GetState() == Player.State.Sitting &&
+        return ((Player.Instance.GetState() == Player.State.Sitting) ||
+                (Player.Instance.GetState() == Player.State.Typing)) &&
             (Player.Instance.transform.position - transform.position).magnitude < 2.5f;
     }
 

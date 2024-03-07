@@ -13,6 +13,7 @@ public class Character : ConversationalObject {
 
     private float timeStartTalk = float.NegativeInfinity;
     private bool isTalking = false;
+   
 
     void Start() {
         StartCoroutine(InitializeAnimation());
