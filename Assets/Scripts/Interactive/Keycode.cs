@@ -3,18 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Keycode : MonoBehaviour
+public class Keycode : BaseCodeMechanism
 {
-
-    public event EventHandler OnSuccessCodeEntered;
-    public event EventHandler OnErrorCodeEntered;
-
-    public string passcode;
     public Transform keys;
     public Transform keycodeMesh;
     public Material successColorMaterial;
     public Material failureColorMaterial;
-    public GameLogic.GameStep stepAfterUnlock;
 
     private string currentSequence;
     private Material originalMaterial;
@@ -49,7 +43,7 @@ public class Keycode : MonoBehaviour
             currentSequence = "";
         } else if (e.value == "enter" && currentSequence.Length > 0) {
             if (currentSequence == passcode) {
-                OnSuccessCodeEntered?.Invoke(this, EventArgs.Empty);
+                IssueSuccessEvent();
                 nbPulsesLeft = 2;
                 pulseDuration = 1f;
                 pulseMaterial = successColorMaterial;
@@ -57,7 +51,7 @@ public class Keycode : MonoBehaviour
                     GameLogic.Instance.SetStep(stepAfterUnlock);
                 }
             } else {
-                OnErrorCodeEntered?.Invoke(this, EventArgs.Empty);
+                IssueErrorEvent();
                 nbPulsesLeft = 6;
                 pulseDuration = 0.2f;
                 pulseMaterial = failureColorMaterial;

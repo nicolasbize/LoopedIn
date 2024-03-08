@@ -12,6 +12,7 @@ public class Pickup : InteractiveObject {
         Briefcase,
         PlayroomCodePuzzle,
         KeyCode,
+        Diary,
     }
 
     public Type type;
@@ -25,7 +26,7 @@ public class Pickup : InteractiveObject {
     }
 
     public override void Interact() {
-        Player.Instance.Pickup(type);
+        Player.Instance.PickUp(type);
         if (destroyAfterPickup) {
             Destroy(gameObject);
         } else {

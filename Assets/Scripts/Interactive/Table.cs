@@ -18,7 +18,7 @@ public class Table : InteractiveObject {
 
     public override void Interact() {
         if (CanInteract()) {
-            Player.Instance.Stand(targetAnchor);
+            Player.Instance.Stand(targetAnchor);            
         }
     }
 }

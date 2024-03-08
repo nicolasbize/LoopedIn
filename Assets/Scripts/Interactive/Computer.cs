@@ -4,17 +4,21 @@ using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using static ComputerAccountSO;
 
 public class Computer : InteractiveObject {
 
 
     public Transform canvas;
     public Transform consoleText;
+    public ComputerAccountSO[] accounts;
 
     public bool isFree;
     private bool isTurnedOn;
+    private bool isBeingUsed;
     private bool isPendingInput = false;
     private bool isAuthenticated = false;
+    private ComputerAccountSO authenticatedAccount = null;
 
     private int maxRows = 13;
     private int maxCols = 40;
@@ -41,6 +45,13 @@ public class Computer : InteractiveObject {
             validKeys.Add((KeyCode)i, numbers[index].ToString());
         }
         validKeys.Add(KeyCode.Space, " ");
+        Player.Instance.OnStateChange += Player_OnStateChange;
+    }
+
+    private void Player_OnStateChange(object sender, System.EventArgs e) {
+        if (isBeingUsed && Player.Instance.GetState() == Player.State.Moving) {
+            isBeingUsed = false;
+        }
     }
 
     public override string ActionName() {
@@ -57,20 +68,21 @@ public class Computer : InteractiveObject {
             canvas.gameObject.SetActive(true);
             StartCoroutine(StartBootingSequence());
         }
+        isBeingUsed = true;
         Player.Instance.StartTyping();
         StopHighlight();
     }
 
     private IEnumerator StartBootingSequence() {
-        AddConsoleText("Booting TTA Network Operating System...");
+        AddConsoleText("BOOTING TTA NETWORK OPERATING SYSTEM...");
         yield return new WaitForSeconds(2.0f);
         Clear();
-        AddConsoleText("TTA Network OS 2.1 Ready.");
+        AddConsoleText("TTA OS 2.1 IS READY.");
         yield return new WaitForSeconds(0.5f);
         AddConsoleText("");
-        AddConsoleText("Starting secure connection...");
+        AddConsoleText("STARTING SECURE CONNECTION...");
         yield return new WaitForSeconds(1.5f);
-        AddConsoleText("Connected.");
+        AddConsoleText("CONNECTED.");
         yield return new WaitForSeconds(0.5f);
         PromptAuthentication();
     }
@@ -79,7 +91,7 @@ public class Computer : InteractiveObject {
         username = "";
         password = "";
         AddConsoleText("");
-        AddConsoleText("Username:");
+        AddConsoleText("USERNAME:");
         StartInput(false);
     }
 
@@ -93,9 +105,8 @@ public class Computer : InteractiveObject {
     }
 
     public void Update() {
-        if (isPendingInput) {
+        if (isPendingInput && isBeingUsed) {
             bool pressedKey = false;
-            bool isShift = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
             if (Input.GetKeyDown(KeyCode.Backspace) && currentInput.Length > 0) {
                 currentInput = currentInput.Substring(0, currentInput.Length - 1);
                 pressedKey = true;
@@ -103,7 +114,7 @@ public class Computer : InteractiveObject {
             // cannot believe there's no better way to do this...
             foreach (KeyCode keyCode in validKeys.Keys) {
                 if (Input.GetKeyDown(keyCode)) {
-                    currentInput += (isShift ? validKeys[keyCode].ToUpper() : validKeys[keyCode].ToLower());
+                    currentInput += validKeys[keyCode].ToUpper();
                     pressedKey = true;
                 }
             }
@@ -131,13 +142,14 @@ public class Computer : InteractiveObject {
         if (!isAuthenticated) {
             if (username == "") {
                 username = currentInput.Trim().ToUpper();
-                AddConsoleText("Password:");
+                AddConsoleText("PASSWORD:");
                 StartInput(false);
             } else {
                 password = currentInput.Trim().ToUpper();
                 isAuthenticated = TryAuthenticate(username, password);
                 if (isAuthenticated) {
-                    AddConsoleText("Welcome " + username);
+                    AddConsoleText("");
+                    AddConsoleText("WELCOME " + username.Split(' ')[0]);
                     StartInput();
                 } else {
                     AddConsoleText("Invalid credentials. Please try again.");
@@ -145,39 +157,92 @@ public class Computer : InteractiveObject {
                 }
             }
         } else {
+            bool isErrorCommand = false;
             if (currentInput.Trim().ToUpper() == "HELP") {
                 StartCoroutine(SystemResponse(new List<string>(){
             "TTA 2.1 Command List",
             "--------------------",
-            "mail list    - Lists recent emails",
-            "read #       - Reads email specified",
-            "quit         - Exits TTA",
+            "inbox        - Lists recent emails",
+            "mail #       - Reads email specified",
+            "logout       - Log out of account",
             }));
+            } else if (currentInput.Trim().ToUpper() == "INBOX") {
+                List<string> inbox = new List<string>() {
+                    "INBOX: " + authenticatedAccount.emails.Length.ToString()  + " emails:",
+                    "---------------",
+                };
+                for (int i = 0; i < authenticatedAccount.emails.Length; i++) {
+                    inbox.Add((i + 1).ToString() + ". " + authenticatedAccount.emails[i].topic);
+                }
+                StartCoroutine(SystemResponse(inbox));
+            } else if (currentInput.Trim().ToUpper() == "LOGOUT") {
+                Clear();
+                AddConsoleText("YOU ARE NOW LOGGED OUT.");
+                AddConsoleText("");
+                isAuthenticated = false;
+                PromptAuthentication();
+            } else if (currentInput.Trim().ToUpper().StartsWith("MAIL ")) {
+                string[] parts = currentInput.Trim().Split(" ");
+                if (parts.Length == 2 && int.TryParse(parts[1], out int emailIndex)) {
+                    if (emailIndex - 1 < authenticatedAccount.emails.Length) {
+                        Email emailSO = authenticatedAccount.emails[emailIndex - 1];
+                        List<string> email = new List<string>() {
+                            "DATE: " + emailSO.date,
+                            "FROM: " + emailSO.from,
+                            "  TO: " + emailSO.to,
+                            "SUBJ: " + emailSO.topic,
+                            ""
+                        };
+                        foreach(string s in emailSO.body.Split("\n")) {
+                            email.Add(s);
+                        }
+                        StartCoroutine(SystemResponse(email, emailSO.executeStep));
+                    }  else {
+                        StartCoroutine(SystemResponse(new List<string>(){
+                            "Email index is out of bounds. Try again"
+                        }));
+                    }
+                } else {
+                    isErrorCommand = true;
+                }
             } else {
+                isErrorCommand = true;
+            }
+
+            if (isErrorCommand) {
                 StartCoroutine(SystemResponse(new List<string>(){
-            "Invalid Syntax.",
-            "Type HELP for a list of commands.",
-            }));
+                "Invalid Syntax.",
+                "Type HELP for a list of commands.",
+                }));
             }
         }
 
 
     }
 
-    private IEnumerator SystemResponse(List<string> listing) {
+    private IEnumerator SystemResponse(List<string> listing, GameLogic.GameStep executeStep = GameLogic.GameStep.None) {
         foreach (string line in listing) {
             AddConsoleText(line);
             yield return new WaitForSeconds(0.3f);
+        }
+        if (executeStep != GameLogic.GameStep.None) {
+            GameLogic.Instance.SetStep(executeStep);
         }
         StartInput();
     }
 
     private bool TryAuthenticate(string username, string password) {
-        return (username == "AAA" && password == "123");
+        foreach(ComputerAccountSO account in accounts) {
+            if (username == account.username && password == account.password) {
+                authenticatedAccount  = account;
+                return true;
+            }
+        }
+        return false;
     }
 
     private void AddConsoleText(string text) {
-        consoleLines.Add(text);
+        consoleLines.Add(text.ToUpper());
         if (consoleLines.Count > maxRows) {
             List<string> newLines = new List<string>();
             for (int i = 1; i < consoleLines.Count; i++) {

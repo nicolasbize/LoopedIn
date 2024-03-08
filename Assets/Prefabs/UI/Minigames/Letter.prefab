@@ -54,6 +54,8 @@ MonoBehaviour:
   highlightImage: {fileID: 996277622827366908}
   selectedImage: {fileID: 6905817463712335063}
   text: {fileID: 558664115957522817}
+  isSelectable: 1
+  isCorrect: 0
 --- !u!1 &3931487283227928156
 GameObject:
   m_ObjectHideFlags: 0

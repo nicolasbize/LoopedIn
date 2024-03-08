@@ -287,6 +287,8 @@ MonoBehaviour:
   highlightObject: {fileID: 5847373519386864777}
   canvas: {fileID: 1358338788001926460}
   consoleText: {fileID: 940792017432246335}
+  accounts:
+  - {fileID: 11400000, guid: 5d05fcb6d7363574bb10691f70b31959, type: 2}
   isFree: 1
 --- !u!65 &7850077179861230976
 BoxCollider:
@@ -437,7 +439,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 42ef278d2d20a9241b7d909de74579f3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: -0.004
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 42ef278d2d20a9241b7d909de74579f3,
         type: 3}

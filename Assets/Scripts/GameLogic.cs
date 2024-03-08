@@ -25,7 +25,7 @@ public class GameLogic : MonoBehaviour
         CompletedEmmaConversation,
         HeardWeakPassword,       // IT guy complained about password123
         MappedStonedPortrait,    // player clicked on Emma Stoned face, can log in
-        AccessedWeakAccount,     // Saw locker combination
+        GotLockerCombination,     // Saw locker combination
         OpenedLocker,
         BrokeDiaryCode,
         OpenedSecretLibraryRoom,

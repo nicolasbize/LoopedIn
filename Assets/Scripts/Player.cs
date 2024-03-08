@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
 
     public event EventHandler OnStartSmilePuzzle;
     public event EventHandler OnStartPlayroomPuzzle;
+    public event EventHandler OnStartDiaryPuzzle;
     public event EventHandler OnStateChange;
 
     public static Player Instance;
@@ -38,10 +39,22 @@ public class Player : MonoBehaviour
 
     private State state;
     private Chair currentChair = null;
+    private State stateBeforeThought = State.Moving;
+    private State stateBeforeTalking = State.Moving;
 
     private void Awake() {
         Instance = this;
         state = State.Moving;
+    }
+
+    private void Start() {
+        GameLogic.Instance.OnStepChange += GameLogic_OnStepChange;
+    }
+
+    private void GameLogic_OnStepChange(object sender, GameLogic.OnStepChangeEventArgs e) {
+        if (e.step == GameLogic.GameStep.GotLockerCombination) {
+            StartThinking("Looks like this Jay might have found something interesting...");
+        }
     }
 
     public State GetState() {
@@ -57,6 +70,7 @@ public class Player : MonoBehaviour
     }
 
     public void StartTalking(Character target) {
+        stateBeforeTalking = state;
         state = State.Talking;
         OnStateChange?.Invoke(this, EventArgs.Empty);
         OnStartDialog?.Invoke(this, new OnStartDialogEventArgs() {
@@ -65,8 +79,7 @@ public class Player : MonoBehaviour
     }
 
     public void StopTalking() {
-        state = State.Moving;
-        Debug.Log("stop talking");
+        state = stateBeforeTalking;
         OnStateChange?.Invoke(this, EventArgs.Empty);
         OnStopDialog?.Invoke(this, EventArgs.Empty);
     }
@@ -91,24 +104,34 @@ public class Player : MonoBehaviour
         OnStateChange?.Invoke(this, EventArgs.Empty);
     }
 
-    public void Pickup(Pickup.Type type) {
-        if (type == global::Pickup.Type.Briefcase) {
+    public void PickUp(Pickup.Type type) {
+        if (type == Pickup.Type.Briefcase) {
             OnStartSmilePuzzle?.Invoke(this, EventArgs.Empty);
             state = State.Puzzling;
             OnStateChange?.Invoke(this, EventArgs.Empty);
-        } else if(type == global::Pickup.Type.PlayroomCodePuzzle) {
+        } else if (type == Pickup.Type.PlayroomCodePuzzle) {
             OnStartPlayroomPuzzle?.Invoke(this, EventArgs.Empty);
+            state = State.Puzzling;
+            OnStateChange?.Invoke(this, EventArgs.Empty);
+        } else if (type == Pickup.Type.Diary) {
+            OnStartDiaryPuzzle?.Invoke(this, EventArgs.Empty);
             state = State.Puzzling;
             OnStateChange?.Invoke(this, EventArgs.Empty);
         }
     }
-
+    
     public void CompleteSmilePuzzle() {
         GameLogic.Instance.SetStep(GameLogic.GameStep.SolvedBriefcaseClue);
-        StartThinking("OK, my target has something to do with a smile");
+        StartThinking("Looks like my target has something to do with that \"smile\".");
+    }
+
+    public void CompleteDiaryPuzzle() {
+        GameLogic.Instance.SetStep(GameLogic.GameStep.BrokeDiaryCode);
+        
     }
 
     public void StartThinking(string thought) {
+        stateBeforeThought = state;
         state = State.Thinking;
         OnStateChange?.Invoke(this, EventArgs.Empty);
         OnStartThinking?.Invoke(this, new OnStartThinkingEventArgs() {
@@ -117,9 +140,13 @@ public class Player : MonoBehaviour
     }
 
     public void StopThinking() {
-        state = State.Moving;
+        if (stateBeforeThought == State.Puzzling) {
+            state = State.Moving;
+        } else {
+            state = stateBeforeThought;
+        }
         OnStateChange?.Invoke(this, EventArgs.Empty);
-        Debug.Log("stopped thinking");
+        
     }
 
     public void StartTyping() {

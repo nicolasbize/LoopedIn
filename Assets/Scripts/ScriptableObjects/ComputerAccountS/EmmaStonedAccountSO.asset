@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5b2218b6ab69ab4593388bde6ff8bfa, type: 3}
+  m_Name: EmmaStonedAccountSO
+  m_EditorClassIdentifier: 
+  username: EMMA STONED
+  password: PASSWORD123
+  emails:
+  - topic: rain check?
+    from: lucy@tta.org
+    to: emma@tta.org
+    date: 11 Feb 1993, 10:04PM
+    executeStep: 0
+    body: 'hey something came up,
+
+      I won''t be in the office tomorrow.
+
+      don''t
+      go near Jay, he is trouble.
+
+      L.'
+  - topic: to Jay or not to Jay
+    from: lucy@tta.org
+    to: emma@tta.org
+    date: 9 Feb 1993, 11:21AM
+    executeStep: 0
+    body: 'ok I admit he is pretty cute
+
+      but... you gotta stop stalking him!
+
+      you''re
+      gonna scare him off!
+
+      heck you''re starting to scare me!
+
+      L.'
+  - topic: jay's locker
+    from: emma@tta.org
+    to: emma@tta.org
+    date: 8 Feb 1993, 4:46PM
+    executeStep: 8
+    body: 'jay started acting all weird again
+
+      he was so into me and then nothing
+
+      I
+      followed him to make sure he was ok
+
+      I saw him open his locker
+
+      5th
+      locker, code is 4827'

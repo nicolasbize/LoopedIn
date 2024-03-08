@@ -6,7 +6,7 @@ using UnityEngine;
 public class Door : InteractiveObject {
 
     public bool isLocked = false;
-    public Keycode lockPad;
+    public BaseCodeMechanism lockPad;
     public GameLogic.GameStep unlockedStep;
 
     public enum State { Closed, Open}
@@ -24,6 +24,13 @@ public class Door : InteractiveObject {
         if (lockPad != null ) {
             isLocked = true;
             lockPad.OnSuccessCodeEntered += LockPad_OnSuccessCodeEntered;
+            lockPad.OnErrorCodeEntered += LockPad_OnErrorCodeEntered;
+        }
+    }
+
+    private void LockPad_OnErrorCodeEntered(object sender, EventArgs e) {
+        if (state == State.Closed) {
+            isLocked = true;
         }
     }
 

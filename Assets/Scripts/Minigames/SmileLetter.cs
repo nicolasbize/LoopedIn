@@ -8,7 +8,7 @@ public class SmileLetter : MonoBehaviour
 
     public Transform letterBackground;
     public Transform letterPrefab;
-    public string[] hintPhrases;
+    [TextArea] public string hint;
     public Transform resetButton;
 
     private List<HighlightableLetter> letters = new List<HighlightableLetter>();
@@ -16,12 +16,13 @@ public class SmileLetter : MonoBehaviour
     public event EventHandler OnSolutionFound;
 
     private void Start() {
-        for(int i = 0; i < hintPhrases.Length; i++) {
+        string[] hintPhrases = hint.Split('\n');
+        for (int i = 0; i < hintPhrases.Length; i++) {
             string phrase = hintPhrases[i];
             for(int j = 0; j < phrase.Length; j++) {
                 Transform letterObj = Instantiate(letterPrefab, letterBackground);
                 HighlightableLetter letter = letterObj.GetComponent<HighlightableLetter>();
-                letter.SetLetter(phrase[j].ToString());
+                letter.SetLetter(phrase[j]);
                 letterObj.GetComponent<RectTransform>().localPosition = new Vector3(20 + 40 * j, -20 - 60 * i, 0f);
                 letterObj.GetComponent<RectTransform>().anchorMin = new Vector2(0, 1);
                 letterObj.GetComponent<RectTransform>().anchorMax = new Vector2(0, 1);
