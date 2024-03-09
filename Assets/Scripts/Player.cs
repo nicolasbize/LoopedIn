@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -24,6 +25,7 @@ public class Player : MonoBehaviour
     public event EventHandler OnStartSmilePuzzle;
     public event EventHandler OnStartPlayroomPuzzle;
     public event EventHandler OnStartDiaryPuzzle;
+    public event EventHandler OnLibrarianNotePickup;
     public event EventHandler OnStateChange;
 
     public static Player Instance;
@@ -71,16 +73,14 @@ public class Player : MonoBehaviour
 
     public void StartTalking(Character target) {
         stateBeforeTalking = state;
-        state = State.Talking;
-        OnStateChange?.Invoke(this, EventArgs.Empty);
+        SetState(State.Talking);
         OnStartDialog?.Invoke(this, new OnStartDialogEventArgs() {
             targetDialog = target
         });
     }
 
     public void StopTalking() {
-        state = stateBeforeTalking;
-        OnStateChange?.Invoke(this, EventArgs.Empty);
+        SetState(stateBeforeTalking);
         OnStopDialog?.Invoke(this, EventArgs.Empty);
     }
 
@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
         transform.position = chair.targetAnchor.position;
         transform.rotation = chair.targetAnchor.rotation;
         Camera.main.transform.localRotation = Quaternion.Euler(0, 0, 0);
-        state = State.Sitting;
+        SetState(State.Sitting);
         currentChair = chair;
     }
 
@@ -100,24 +100,25 @@ public class Player : MonoBehaviour
             currentChair.FreeUp();
             currentChair = null;
         }
-        state = State.Moving;
-        OnStateChange?.Invoke(this, EventArgs.Empty);
+        SetState(State.Moving);
     }
 
     public void PickUp(Pickup.Type type) {
         if (type == Pickup.Type.Briefcase) {
             OnStartSmilePuzzle?.Invoke(this, EventArgs.Empty);
-            state = State.Puzzling;
-            OnStateChange?.Invoke(this, EventArgs.Empty);
         } else if (type == Pickup.Type.PlayroomCodePuzzle) {
             OnStartPlayroomPuzzle?.Invoke(this, EventArgs.Empty);
-            state = State.Puzzling;
-            OnStateChange?.Invoke(this, EventArgs.Empty);
         } else if (type == Pickup.Type.Diary) {
             OnStartDiaryPuzzle?.Invoke(this, EventArgs.Empty);
-            state = State.Puzzling;
-            OnStateChange?.Invoke(this, EventArgs.Empty);
+        } else if (type == Pickup.Type.ScrambledLibraryNote) {
+            OnLibrarianNotePickup?.Invoke(this, EventArgs.Empty);
         }
+        SetState(State.Puzzling);
+    }
+
+    public void SetState(State newState) {
+        state = newState;
+        OnStateChange?.Invoke(this, EventArgs.Empty);
     }
     
     public void CompleteSmilePuzzle() {
@@ -132,8 +133,7 @@ public class Player : MonoBehaviour
 
     public void StartThinking(string thought) {
         stateBeforeThought = state;
-        state = State.Thinking;
-        OnStateChange?.Invoke(this, EventArgs.Empty);
+        SetState(State.Thinking);
         OnStartThinking?.Invoke(this, new OnStartThinkingEventArgs() {
             thought = thought
         });
@@ -141,17 +141,14 @@ public class Player : MonoBehaviour
 
     public void StopThinking() {
         if (stateBeforeThought == State.Puzzling) {
-            state = State.Moving;
+            SetState(State.Moving);
         } else {
-            state = stateBeforeThought;
+            SetState(stateBeforeThought);
         }
-        OnStateChange?.Invoke(this, EventArgs.Empty);
-        
     }
 
     public void StartTyping() {
-        state = State.Typing;
-        OnStateChange?.Invoke(this, EventArgs.Empty);
+        SetState(State.Typing);
     }
 
 }

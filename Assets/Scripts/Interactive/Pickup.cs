@@ -13,6 +13,7 @@ public class Pickup : InteractiveObject {
         PlayroomCodePuzzle,
         KeyCode,
         Diary,
+        ScrambledLibraryNote,
     }
 
     public Type type;

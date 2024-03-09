@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Plaque : InteractiveObject
 {
-    public string text;
-    [TextArea]
-    public string storyText;
+    [TextArea] public string text;
+    [TextArea] public string storyText;
     public GameLogic.GameStep triggerStep;
     public GameLogic.GameStep executesStep;
 

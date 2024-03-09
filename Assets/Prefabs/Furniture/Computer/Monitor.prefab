@@ -289,6 +289,7 @@ MonoBehaviour:
   consoleText: {fileID: 940792017432246335}
   accounts:
   - {fileID: 11400000, guid: 5d05fcb6d7363574bb10691f70b31959, type: 2}
+  - {fileID: 11400000, guid: 3ac3da275a01c1c4a98f0c7a78d313f2, type: 2}
   isFree: 1
 --- !u!65 &7850077179861230976
 BoxCollider:
