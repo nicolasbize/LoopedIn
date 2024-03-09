@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,8 +6,14 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using static ComputerAccountSO;
+using static GameLogic;
 
 public class Computer : InteractiveObject {
+
+    public event EventHandler<OnInjectionOverrideEventArgs> OnInjectionOverride;
+    public class OnInjectionOverrideEventArgs : EventArgs {
+        public string name;
+    }
 
 
     public Transform canvas;
@@ -181,6 +188,13 @@ public class Computer : InteractiveObject {
                 AddConsoleText("");
                 isAuthenticated = false;
                 PromptAuthentication();
+            } else if (currentInput.Trim().ToUpper() == "OVERRIDE INJECT" && authenticatedAccount.elevated) {
+                List<string> messages = new List<string>();
+                messages.Add("INJECTION OVERRIDE IS NOW ACTIVE.");
+                OnInjectionOverride?.Invoke(this, new OnInjectionOverrideEventArgs() {
+                    name = authenticatedAccount.name
+                });
+                StartCoroutine(SystemResponse(messages));
             } else if (currentInput.Trim().ToUpper().StartsWith("MAIL ")) {
                 string[] parts = currentInput.Trim().Split(" ");
                 if (parts.Length == 2 && int.TryParse(parts[1], out int emailIndex)) {

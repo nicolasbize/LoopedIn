@@ -132,6 +132,7 @@ public class Player : MonoBehaviour
     }
 
     public void StartThinking(string thought) {
+        if (state == State.Thinking) return; // TODO: fix this ugly state management
         stateBeforeThought = state;
         SetState(State.Thinking);
         OnStartThinking?.Invoke(this, new OnStartThinkingEventArgs() {
