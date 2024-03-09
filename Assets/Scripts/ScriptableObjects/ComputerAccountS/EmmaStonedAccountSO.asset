@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   username: EMMA STONED
   password: PASSWORD123
+  elevated: 0
   emails:
   - topic: rain check?
     from: lucy@tta.org
     to: emma@tta.org
-    date: 11 Feb 1993, 10:04PM
+    date: Feb 11, 1993, 10:04PM
     executeStep: 0
     body: 'hey something came up,
 
@@ -31,7 +32,7 @@ MonoBehaviour:
   - topic: to Jay or not to Jay
     from: lucy@tta.org
     to: emma@tta.org
-    date: 9 Feb 1993, 11:21AM
+    date: Feb 09, 1993, 11:21AM
     executeStep: 0
     body: 'ok I admit he is pretty cute
 
@@ -46,7 +47,7 @@ MonoBehaviour:
   - topic: jay's locker
     from: emma@tta.org
     to: emma@tta.org
-    date: 8 Feb 1993, 4:46PM
+    date: Feb 08, 1993, 4:46PM
     executeStep: 8
     body: 'jay started acting all weird again
 

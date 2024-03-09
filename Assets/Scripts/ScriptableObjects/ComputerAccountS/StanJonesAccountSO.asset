@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5b2218b6ab69ab4593388bde6ff8bfa, type: 3}
+  m_Name: StanJonesAccountSO
+  m_EditorClassIdentifier: 
+  username: STAN JONES
+  password: HARVARD
+  elevated: 1
+  emails:
+  - topic: Unstable experimentation
+    from: mike@tta.org
+    to: stan@tta.org
+    date: Feb 05, 1993, 1:10PM
+    executeStep: 0
+    body: 'Be careful not to inject a quota
+
+      of chemicals into the brain that
+
+      will
+      cause it to become unstable.
+
+      This caused experiment #6 to
+
+      fail
+      miserably. Can you test out
+
+      what I''ve written on the board?'
+  - topic: Patients being alive
+    from: lucy@tta.org
+    to: stan@tta.org
+    date: Dec 05, 1992, 1:17AM
+    executeStep: 0
+    body: "I've given a lot of thought to what\nyou mentioned this morning, and\nI
+      think we should move forward\nwith live patients. I know it's a\ndifficult
+      call to make, but the \nfuture of our species is at stake.\nThose people will
+      be heroes\nin my book."
+  - topic: The brain is the key
+    from: lucy@tta.org
+    to: stan@tta.org
+    date: Sep 05, 1992, 3:53AM
+    executeStep: 0
+    body: 'Stan, how fast can you get the brain
+
+      chip to work? We need biological
+
+      compute
+      power to perform all the
+
+      necessary calculations for time
+
+      travel.
+      Do whatever it takes to
+
+      figure it out.'

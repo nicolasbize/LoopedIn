@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5b2218b6ab69ab4593388bde6ff8bfa, type: 3}
+  m_Name: LucyMillerAccountSO
+  m_EditorClassIdentifier: 
+  username: LUCY MILLER
+  password: 02011943
+  elevated: 1
+  emails:
+  - topic: Let's hang out!
+    from: emma@tta.org
+    to: lucy@tta.org
+    date: Feb 09, 1993
+    executeStep: 0
+    body: 'Hey Lucy,
+
+      Come hang out with me this
+
+      Saturday! I''ll show
+      you a
+
+      few tips on how to get boys!
+
+      Jay is so cute! don''t be
+      jealous
+
+      you''ll get your turn haha'
+  - topic: A problem and a solution
+    from: jane@tta.org
+    to: lucy@tta.org
+    date: Feb 10, 1993
+    executeStep: 0
+    body: "I know you were looking\nfor someone new, I think\nI found the perfect
+      person.\nI'll get him up and ready for \nsurgery tomorrow,"
+  - topic: Issue with password
+    from: tom@tta.org
+    to: lucy@tta.org
+    date: Jan 05, 1993
+    executeStep: 0
+    body: 'Hey Lucy what did you do
+
+      when you had an issue with
+
+      your
+      account last time? I''m
+
+      so tired of this system I''m just
+
+      going
+      to use my name this
+
+      time haha'
+  - topic: The perfect experiment
+    from: tom@tta.org
+    to: lucy@tta.org
+    date: Oct 11, 1992
+    executeStep: 0
+    body: 'The perfect experiment occurs
+
+      when none of the subjects are
+
+      even
+      aware of being in a time loop.
+
+      This requires a perfect sync of
+
+      all
+      of pre-requisites. We will need
+
+      much, much more compute...'

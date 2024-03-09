@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5b2218b6ab69ab4593388bde6ff8bfa, type: 3}
+  m_Name: TomSmithAccountSO
+  m_EditorClassIdentifier: 
+  username: TOM SMITH
+  password: TOMSMITH
+  elevated: 1
+  emails:
+  - topic: Safety switch
+    from: lucy@tta.org
+    to: tom@tta.org
+    date: Jan 05, 1993, 09:21AM
+    executeStep: 0
+    body: 'Given the issue that happened
+
+      in the previous compound, we''re
+
+      starting
+      a new process that requires
+
+      manual approval from the four of
+
+      us
+      before chemicals can be injected.
+
+      The command is hidden by default,
+
+      you''ll
+      need to type the following:
+
+      OVERRIDE INJECT'
+  - topic: A better future
+    from: mike@tta.org
+    to: tom@tta.org
+    date: Feb 08, 1993, 11:28AM
+    executeStep: 0
+    body: 'Can you imagine a future where
+
+      mistakes can simply be erased?
+
+      No
+      more pain, no more war...
+
+      You shouldn''t be mourning our
+
+      patients,
+      they are saving more
+
+      lives than we can count...'

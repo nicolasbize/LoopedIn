@@ -8,6 +8,7 @@ public class ComputerAccountSO : ScriptableObject {
 
     public string username;
     public string password;
+    public bool elevated;
 
     public Email[] emails;
 

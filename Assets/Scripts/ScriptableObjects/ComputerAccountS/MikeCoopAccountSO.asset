@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5b2218b6ab69ab4593388bde6ff8bfa, type: 3}
+  m_Name: MikeCoopAccountSO
+  m_EditorClassIdentifier: 
+  username: MIKE COOP
+  password: SPARTACUS
+  elevated: 1
+  emails:
+  - topic: It can work!
+    from: tom@tta.org
+    to: mike@tta.org
+    date: Feb 01, 1993, 4:24PM
+    executeStep: 0
+    body: "I got it! I finally got the math\nto work out! I can't believe it!\nI'm
+      going to surprise Lucy tonight!\nWe're all going out for her \nbirthday right?
+      Can't believe she\njust turned 50 today!"
+  - topic: Experiment #7 ready
+    from: lucy@tta.org
+    to: mike@tta.org
+    date: Feb 11, 1993, 12:12PM
+    executeStep: 0
+    body: "Mike, we're moving forward with\nexperiment #7 tomorrow. We \nhave a fresh
+      brain, the execs will\npull the trigger sometime\nduring the day tomorrow!\nWe're
+      about to make history!\nHurry and leave the premises.\nYay for science! Stay
+      safe!"

@@ -7,7 +7,7 @@ public class Table : InteractiveObject {
     public Transform targetAnchor;
 
     public override string ActionName() {
-        return "stand up";
+        return "stand";
     }
 
     public override bool CanInteract() {
