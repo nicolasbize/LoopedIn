@@ -12,15 +12,16 @@ public class Button : InteractiveObject {
 
     public string actionName;
     public bool isEnabled;
-
+    public float pressedDuration = 0.4f;
     public string buttonValue = "";
     public Transform keyMesh;
     public Material pressedMaterial;
+    public Material enabledMaterial;
 
     private bool isPressed = false;
     private float timePressed = float.NegativeInfinity;
-    private float pressedDuration = 0.4f;
     private Material unpressedMaterial;
+    
 
     private new void Start() {
         base.Start();
@@ -33,6 +34,14 @@ public class Button : InteractiveObject {
 
     public void Enable() {
         isEnabled = true;
+        if (enabledMaterial != null) {
+            keyMesh.GetComponent<MeshRenderer>().material = enabledMaterial;
+        }
+    }
+
+    public void Disable() {
+        isEnabled = false;
+        keyMesh.GetComponent<MeshRenderer>().material = unpressedMaterial;
     }
 
     public override bool CanInteract() {
@@ -52,7 +61,8 @@ public class Button : InteractiveObject {
     private void Update() {
         if (isPressed && (Time.timeSinceLevelLoad - timePressed > pressedDuration)) {
             isPressed = false;
-            keyMesh.GetComponent<MeshRenderer>().material = unpressedMaterial;
+            Material material = enabledMaterial == null ? unpressedMaterial : enabledMaterial;
+            keyMesh.GetComponent<MeshRenderer>().material = material;
         }
     }
 }

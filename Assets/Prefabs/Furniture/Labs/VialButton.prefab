@@ -51,6 +51,7 @@ MonoBehaviour:
   highlightObject: {fileID: 1572927397017677433}
   actionName: press
   isEnabled: 1
+  pressedDuration: 0.1
   buttonValue: 
   keyMesh: {fileID: 1546971736810956340}
   pressedMaterial: {fileID: 0}

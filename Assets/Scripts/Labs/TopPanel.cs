@@ -8,7 +8,7 @@ public class TopPanel : MonoBehaviour
 
     public Computer[] computersForOverride;
     public MeshRenderer[] lightMeshes;
-    public Button[] buttonsToEnable;
+    public VialPuzzle vialPuzzle;
     public Material disabledMaterial;
     public Material enabledMaterial;
     private HashSet<string> overridesEnabled = new HashSet<string>();
@@ -33,9 +33,7 @@ public class TopPanel : MonoBehaviour
             lightMeshes[i].material = enabledMaterial;
         }
         if (nbOverrides == computersForOverride.Length) {
-            foreach (Button button in buttonsToEnable) {
-                button.Enable();
-            }
+            vialPuzzle.StartPuzzle();
         }
     }
 }
