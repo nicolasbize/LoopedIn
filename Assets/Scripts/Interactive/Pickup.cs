@@ -14,6 +14,7 @@ public class Pickup : InteractiveObject {
         KeyCode,
         Diary,
         ScrambledLibraryNote,
+        Pass,
     }
 
     public Type type;

@@ -33,8 +33,8 @@ public class DiaryPuzzle : MonoBehaviour
             encoding.Add(alphabet[i], encodedAlphabet[i]);
         }
 
-        PlaceLetters(leftPage, 220, -80);
-        PlaceLetters(rightPage, 1220, -80);
+        PlaceLetters(leftPage, 180, -80);
+        PlaceLetters(rightPage, 920, -80);
     }
 
     private void PlaceLetters(string page, int leftOffset, int topOffset) {
@@ -57,7 +57,7 @@ public class DiaryPuzzle : MonoBehaviour
                 } else {
                     letter.SetLetter(phrase[j]);
                 }
-                letterObj.GetComponent<RectTransform>().localPosition = new Vector3(leftOffset + 26 * j, topOffset - 42 * i, 0f);
+                letterObj.GetComponent<RectTransform>().localPosition = new Vector3(leftOffset + 22 * j, topOffset - 42 * i, 0f);
                 letterObj.GetComponent<RectTransform>().anchorMin = new Vector2(0, 1);
                 letterObj.GetComponent<RectTransform>().anchorMax = new Vector2(0, 1);
                 letterObj.GetComponent<RectTransform>().pivot = new Vector2(0, 1);

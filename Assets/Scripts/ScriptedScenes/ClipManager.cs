@@ -16,9 +16,6 @@ public class ClipManager : MonoBehaviour
     private void Start() {
         GameLogic.Instance.OnStepChange += GameLogic_OnStepChange;
         clips = GetComponents<BaseClip>();
-        foreach (Character character in charactersInvolved) {
-            character.Lock();
-        }
     }
 
     private void GameLogic_OnStepChange(object sender, GameLogic.OnStepChangeEventArgs e) {
@@ -30,6 +27,9 @@ public class ClipManager : MonoBehaviour
 
     private void StartMovie() {
         currentStep = -1;
+        foreach (Character character in charactersInvolved) {
+            character.Lock();
+        }
         PlayNextStep();
     }
 

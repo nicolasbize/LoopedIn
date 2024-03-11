@@ -10,10 +10,25 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1987887980726383756, guid: cbaab6ab223843e42a8fcdfa1e627963,
         type: 3}
+      propertyPath: m_fontSize
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 1987887980726383756, guid: cbaab6ab223843e42a8fcdfa1e627963,
+        type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: 407eb3dd77001b5429a5af4059e17344,
         type: 2}
+    - target: {fileID: 1987887980726383756, guid: cbaab6ab223843e42a8fcdfa1e627963,
+        type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1987887980726383756, guid: cbaab6ab223843e42a8fcdfa1e627963,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 32
+      objectReference: {fileID: 0}
     - target: {fileID: 1987887980726383756, guid: cbaab6ab223843e42a8fcdfa1e627963,
         type: 3}
       propertyPath: m_sharedMaterial

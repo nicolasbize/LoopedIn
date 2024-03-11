@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     public event EventHandler OnStartPlayroomPuzzle;
     public event EventHandler OnStartDiaryPuzzle;
     public event EventHandler OnLibrarianNotePickup;
+    public event EventHandler OnPassPickup;
     public event EventHandler OnStateChange;
 
     public static Player Instance;
@@ -104,6 +105,12 @@ public class Player : MonoBehaviour
     }
 
     public void PickUp(Pickup.Type type) {
+        if (type == Pickup.Type.Pass) {
+            StartThinking("Time to find out what Dr Miller has been doing and undo it!");
+            OnPassPickup?.Invoke(this, EventArgs.Empty);
+            return;
+        }
+
         if (type == Pickup.Type.Briefcase) {
             OnStartSmilePuzzle?.Invoke(this, EventArgs.Empty);
         } else if (type == Pickup.Type.PlayroomCodePuzzle) {

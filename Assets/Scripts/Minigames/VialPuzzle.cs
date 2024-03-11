@@ -30,7 +30,6 @@ public class VialPuzzle : MonoBehaviour
         }
         resetButton.OnButtonPress += ResetButton_OnButtonPress;
         administerButton.OnButtonPress += AdministerButton_OnButtonPress;
-        StartPuzzle();
     }
 
     private void AdministerButton_OnButtonPress(object sender, Button.OnButtonPressEventArgs e) {

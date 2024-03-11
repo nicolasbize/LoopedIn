@@ -16,7 +16,7 @@ public class UIDiaryPuzzle : MonoBehaviour
 
     private void UIDiaryPuzzle_OnSolutionFound(object sender, System.EventArgs e) {
         completed = true;
-        Player.Instance.StartThinking("This looks bad... I've got to find a way into that library secret room.");
+        Player.Instance.StartThinking("This looks bad... I've got to find a way into that secret library room.");
     }
 
     private void Player_OnStateChange(object sender, System.EventArgs e) {
