@@ -42,7 +42,7 @@ MonoBehaviour:
     branches:
     - question: She asked me to do some research, maybe I can drop it off at her
         desk?
-      currentStepRequirement: 4
+      currentStepRequirement: 0
       stepUnlocked: 0
       response: You need Level 3 clearance to get in and out of the lab facility
       branches:

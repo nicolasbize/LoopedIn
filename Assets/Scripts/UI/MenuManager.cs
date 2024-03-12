@@ -74,7 +74,7 @@ public class MenuManager : MonoBehaviour
         if (playIntro) {
             introCanvas.gameObject.SetActive(true);
         } else {
-            wakeUpCanvas.gameObject.SetActive(true);
+            Player.Instance.ReceiveText();
         }
 
     }

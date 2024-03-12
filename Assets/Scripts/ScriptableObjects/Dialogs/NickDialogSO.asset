@@ -14,15 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   greeting: Can I help you?
   branches:
-  - question: You seem happy, what's your secret?
+  - question: Anything good for lunch?
     currentStepRequirement: 0
-    response: Happiness is a state of mind!
+    stepUnlocked: 0
+    response: Oh you know, the usual!
     branches: []
   - question: Do you know Dr Miller by any chance?
     currentStepRequirement: 3
-    response: Of course, why are you asking?
+    stepUnlocked: 0
+    response: Lucy? Yeah but she's out today
     branches:
-    - question: I need her to double check my math
+    - question: Any way I can check her desk?
       currentStepRequirement: 0
-      response: 
-      branches: []
+      stepUnlocked: 0
+      response: You gotta check with her friends, they usually hang out at the break
+        room.
+      branches:
+      - question: How do I get to that break room?
+        currentStepRequirement: 0
+        stepUnlocked: 0
+        response: No clue haha! Lucy left me a note but it was confusing, I threw
+          it in the trash
+        branches: []

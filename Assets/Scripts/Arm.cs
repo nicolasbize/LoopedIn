@@ -11,10 +11,14 @@ public class Arm : MonoBehaviour
     private float duration = 0.2f;
     private Vector3 startPosition = new Vector3(0, 1.7f, 0.8f);
     private Vector3 endPosition = new Vector3(0, 2.67f, 0.8f);
+    private bool hasReadText = false;
 
     private void Start() {
         transform.localPosition = startPosition;
+
+        Player.Instance.OnStateChange += Player_OnStateChange;
     }
+
 
     public void Activate() {
         // ring
@@ -46,7 +50,7 @@ public class Arm : MonoBehaviour
                 transform.localPosition = Vector3.Lerp(endPosition, startPosition, progress);
             } else {
                 isDropping = false;
-                
+                StartGame();
             }
         }
     }
@@ -54,10 +58,21 @@ public class Arm : MonoBehaviour
     IEnumerator ReadAndThink() {
         yield return new WaitForSeconds(4f);
         Player.Instance.StartThinking("Oh no, I gotta get going quick!");
-        yield return new WaitForSeconds(2f);
-        isDropping = true;
-        timeStart = Time.timeSinceLevelLoad;
-        MenuManager.Instance.StartGame();
-        gameObject.SetActive(false);
+        hasReadText = true;
     }
+
+    private void Player_OnStateChange(object sender, System.EventArgs e) {
+        if (hasReadText) {
+            isDropping = true;
+            timeStart = Time.timeSinceLevelLoad;
+        }
+    }
+
+    private void StartGame() {
+        if (gameObject.activeSelf) {
+            MenuManager.Instance.StartGame();
+            gameObject.SetActive(false);
+        }
+    }
+
 }

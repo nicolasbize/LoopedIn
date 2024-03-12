@@ -10,6 +10,20 @@ public class Character : ConversationalObject {
     public Transform renderCamera;
     public Transform dialogCanvas;
     public Transform thoughtText;
+    public bool randomizeColors;
+
+    public Transform[] skinMeshes;
+    public Transform[] shirtMeshes;
+    public Transform[] eyeMeshes;
+    public Transform[] pantsMeshes;
+    public Transform hairMesh;
+    public Transform[] shoeMeshes;
+
+    public Material[] skinColors;
+    public Material[] hairColors;
+    public Material[] eyeColors;
+    public Material[] shoeColors;
+    public Material[] clothesColors;
 
     private float timeStartTalk = float.NegativeInfinity;
     private bool isTalking = false;
@@ -17,6 +31,31 @@ public class Character : ConversationalObject {
 
     void Start() {
         StartCoroutine(InitializeAnimation());
+        if (randomizeColors) {
+            Material shirtColor = clothesColors[Random.Range(0, clothesColors.Length)];
+            Material skinColor = skinColors[Random.Range(0, skinColors.Length)];
+            Material eyeColor = eyeColors[Random.Range(0, eyeColors.Length)];
+            Material pantsColor = clothesColors[Random.Range(0, clothesColors.Length)];
+            Material shoesColor = shoeColors[Random.Range(0, shoeColors.Length)];
+            Material hairColor = hairColors[Random.Range(0, hairColors.Length)];
+
+            foreach (Transform t in shirtMeshes) {
+                t.GetComponent<MeshRenderer>().material = shirtColor;
+            }
+            foreach (Transform t in skinMeshes) {
+                t.GetComponent<MeshRenderer>().material = skinColor;
+            }
+            foreach (Transform t in eyeMeshes) {
+                t.GetComponent<MeshRenderer>().material = eyeColor;
+            }
+            foreach (Transform t in pantsMeshes) {
+                t.GetComponent<MeshRenderer>().material = pantsColor;
+            }
+            foreach (Transform t in shoeMeshes) {
+                t.GetComponent<MeshRenderer>().material = shoesColor;
+            }
+            hairMesh.GetComponent<MeshRenderer>().material = hairColor;
+        }
     }
 
     IEnumerator InitializeAnimation() {
