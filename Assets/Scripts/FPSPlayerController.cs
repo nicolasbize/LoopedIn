@@ -19,8 +19,8 @@ public class FPSPlayerController : MonoBehaviour {
 
     void Start() {
         characterController = GetComponent<CharacterController>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
         Player.Instance.OnStateChange += Player_OnStateChange;
     }
 

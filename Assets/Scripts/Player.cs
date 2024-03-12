@@ -9,7 +9,8 @@ public class Player : MonoBehaviour
 {
 
     public float speedSitTransition = 1f;
-
+    public Chair currentChair = null;
+    public Arm arm;
 
     public event EventHandler OnStopDialog;
     public event EventHandler<OnStartDialogEventArgs> OnStartDialog;
@@ -41,13 +42,20 @@ public class Player : MonoBehaviour
     }
 
     private State state;
-    private Chair currentChair = null;
     private State stateBeforeThought = State.Moving;
     private State stateBeforeTalking = State.Moving;
 
     private void Awake() {
         Instance = this;
-        state = State.Moving;
+        if (currentChair != null) {
+            state = State.Sitting;
+        } else {
+            state = State.Moving;
+        }
+    }
+
+    public void ReceiveText() {
+        arm.Activate();
     }
 
     private void Start() {
@@ -65,10 +73,12 @@ public class Player : MonoBehaviour
     }
 
     public bool CanMove() {
+        if (MenuManager.Instance.InMenu) return false;
         return state == State.Moving;
     }
 
     public bool CanLookAround() {
+        if (MenuManager.Instance.InMenu) return false;
         return state == State.Moving || state == State.Sitting || state == State.Typing;
     }
 
