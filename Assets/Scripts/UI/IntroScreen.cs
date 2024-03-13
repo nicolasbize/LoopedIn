@@ -19,6 +19,7 @@ public class IntroScreen : MonoBehaviour
         }
         foreach (TypedText t in introTexts) {
             t.OnComplete += Text_OnComplete;
+            t.OnType += Text_OnType;
         }
 
         currentPageIndex = introPages.Length;
@@ -28,6 +29,11 @@ public class IntroScreen : MonoBehaviour
     private void Text_OnComplete(object sender, System.EventArgs e) {
         Destroy(introPages[currentPageIndex].gameObject);
         ShowNextPage();
+    }
+
+    private void Text_OnType(object sender, System.EventArgs e) {
+        GetComponent<AudioSource>().pitch = UnityEngine.Random.Range(0.7f, 1.3f);
+        GetComponent<AudioSource>().Play();
     }
 
     private void ShowNextPage() {

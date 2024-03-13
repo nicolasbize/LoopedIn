@@ -10,6 +10,11 @@ public class WakeUpCanvas : MonoBehaviour
         Player.Instance.OnStateChange += Player_OnStateChange;
     }
 
+    // called from animation
+    public void StartBlinking() {
+        Player.Instance.WakeUp();
+    }
+
     public void FinishBlinking() {
         Player.Instance.StartThinking("Wow, can't believe this class put me to sleep...");
         blinked = true;

@@ -362,13 +362,12 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 55e3e5cae6174fb49b46f29c7ff7733c, type: 2}
   - {fileID: 2100000, guid: 249b22c72424a8c4bac2a53695bb989d, type: 2}
   eyeColors:
-  - {fileID: 2100000, guid: a7a79241006529d4a9c61643c07dc00d, type: 2}
-  - {fileID: 2100000, guid: 5808cde35f95cd041a632af541e09358, type: 2}
-  - {fileID: 2100000, guid: e88029837ffffab4b890042c8047dbb9, type: 2}
-  - {fileID: 2100000, guid: 624672587ac50a146b78526c5902fef5, type: 2}
-  - {fileID: 2100000, guid: c4e4a80d67e66694094fbdb2e69934b6, type: 2}
-  - {fileID: 2100000, guid: 9b6ec9707deb45c4fa9e4673b4a01a63, type: 2}
-  - {fileID: 2100000, guid: c60c877342bb85c4fb2b2b02794d5665, type: 2}
+  - {fileID: 2100000, guid: f3f37f0ad68368d4894e02e10c343178, type: 2}
+  - {fileID: 2100000, guid: 6a9ca877728f9ff4580aec5ac6f89c64, type: 2}
+  - {fileID: 2100000, guid: 33f514c63156b9547ba6b9ba94995696, type: 2}
+  - {fileID: 2100000, guid: 4406c21c07732b442a54cfea450beb4f, type: 2}
+  - {fileID: 2100000, guid: f446e8e4417b22b4dab577f0d9245c8e, type: 2}
+  - {fileID: 2100000, guid: 38fba10503af60c49a750764d77ba9f7, type: 2}
   shoeColors:
   - {fileID: 2100000, guid: 1ca80a3185b215c499eeb88b0cfff109, type: 2}
   - {fileID: 2100000, guid: 60467f2b682a79748b506835f26fbfae, type: 2}

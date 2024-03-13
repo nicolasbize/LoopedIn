@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class TypedText : MonoBehaviour
 {
+    public event EventHandler OnType;
     public event EventHandler OnComplete;
 
     private string fullText;
@@ -39,6 +40,7 @@ public class TypedText : MonoBehaviour
                     GetComponent<TextMeshProUGUI>().text = fullText.Truncate(indexText);
                     timeSinceLastChar = Time.timeSinceLevelLoad;
                     timeBetweenChars = clickedToSpeed ? 0.01f : UnityEngine.Random.value / 10f;
+                    OnType?.Invoke(this, EventArgs.Empty);
                 } else {
                     isTyping = false;
                     isDone = true;

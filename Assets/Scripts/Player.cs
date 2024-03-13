@@ -54,7 +54,12 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void WakeUp() {
+        GetComponent<AudioSource> ().Play();
+    }
+
     public void ReceiveText() {
+        arm.gameObject.SetActive(true);
         arm.Activate();
     }
 

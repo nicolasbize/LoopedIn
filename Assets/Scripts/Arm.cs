@@ -10,7 +10,7 @@ public class Arm : MonoBehaviour
     private float timeStart = float.NegativeInfinity;
     private float duration = 0.2f;
     private Vector3 startPosition = new Vector3(0, 1.7f, 0.8f);
-    private Vector3 endPosition = new Vector3(0, 2.67f, 0.8f);
+    private Vector3 endPosition = new Vector3(0, 2.71f, 0.8f);
     private bool hasReadText = false;
 
     private void Start() {
