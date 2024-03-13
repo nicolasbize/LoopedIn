@@ -39,11 +39,13 @@ public class Player : MonoBehaviour
         Puzzling,
         Thinking,
         Typing,
+        Dying,
     }
 
     private State state;
     private State stateBeforeThought = State.Moving;
     private State stateBeforeTalking = State.Moving;
+    private Transform originalTransform;
 
     private void Awake() {
         Instance = this;
@@ -84,7 +86,7 @@ public class Player : MonoBehaviour
 
     public bool CanLookAround() {
         if (MenuManager.Instance.InMenu) return false;
-        return state == State.Moving || state == State.Sitting || state == State.Typing;
+        return state == State.Moving || state == State.Sitting || state == State.Typing || state == State.Dying;
     }
 
     public void StartTalking(Character target) {
@@ -106,6 +108,16 @@ public class Player : MonoBehaviour
         Camera.main.transform.localRotation = Quaternion.Euler(0, 0, 0);
         SetState(State.Sitting);
         currentChair = chair;
+    }
+
+    public void Die() {
+        SetState(State.Dying);
+    }
+
+    public void ResetToOriginalTransform() {
+        transform.position = originalTransform.position;
+        transform.rotation = originalTransform.rotation;
+        
     }
 
     public void Stand(Transform targetDestination) {

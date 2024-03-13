@@ -10,6 +10,7 @@ public class MenuManager : MonoBehaviour
     public Canvas mainMenuCanvas;
     public IntroScreen introCanvas;
     public WakeUpCanvas wakeUpCanvas;
+    public EndLoopCanvas endLoopCanvas;
 
     public bool playLogos;
     public bool playIntro;
@@ -35,20 +36,41 @@ public class MenuManager : MonoBehaviour
         InMenu = false;
     }
 
+    public void TransitionToRestart() {
+        endLoopCanvas.gameObject.SetActive(true);
+        endLoopCanvas.StartEndLoop();
+    }
+
     private void Start() {
         newGameButton.OnClick += NewGameButton_OnClick;
         optionsButton.OnClick += OptionsButton_OnClick;
         quitButton.OnClick += QuitButton_OnClick;
         logoCanvas.OnLogosComplete += OnLogosComplete;
         introCanvas.OnIntroComplete += OnIntroComplete;
+        endLoopCanvas.OnReadyToPrepareLoop += EndLoopCanvas_OnReadyToPrepareLoop;
+        endLoopCanvas.OnReadyForLoop += EndLoopCanvas_OnReadyForLoop;
 
         introCanvas.gameObject.SetActive(false);
         wakeUpCanvas.gameObject.SetActive(false);
+        endLoopCanvas.gameObject.SetActive(false);
         if (playLogos) {
             logoCanvas.gameObject.SetActive(true);
         } else {
             mainMenuCanvas.gameObject.SetActive(true);
         }
+    }
+
+    private void EndLoopCanvas_OnReadyToPrepareLoop(object sender, EventArgs e) {
+        Debug.Log("Reposition player at restart with watch");
+        Player.Instance.ResetToOriginalTransform();
+        InMenu = true; // prevent moving
+        endLoopCanvas.RestartGame();
+    }
+
+    private void EndLoopCanvas_OnReadyForLoop(object sender, EventArgs e) {
+        endLoopCanvas.gameObject.SetActive(false);
+        wakeUpCanvas.gameObject.SetActive(true);
+        wakeUpCanvas.GetComponent<Animator>().Play("WakeUp");
     }
 
     private void OnIntroComplete(object sender, EventArgs e) {

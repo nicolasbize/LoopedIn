@@ -13,6 +13,7 @@ public class VialPuzzle : MonoBehaviour
     public Button resetButton;
     public Button administerButton;
     public Transform liquidPrefab;
+    public Explosion explosion;
 
     private List<VialLiquid> currentLiquids = new List<VialLiquid>();
     
@@ -30,6 +31,7 @@ public class VialPuzzle : MonoBehaviour
         }
         resetButton.OnButtonPress += ResetButton_OnButtonPress;
         administerButton.OnButtonPress += AdministerButton_OnButtonPress;
+            administerButton.Enable();
     }
 
     private void AdministerButton_OnButtonPress(object sender, Button.OnButtonPressEventArgs e) {
@@ -85,6 +87,7 @@ public class VialPuzzle : MonoBehaviour
     private void Launch() {
         GetComponent<AudioSource>().Play();
         isInjecting = true;
+        Player.Instance.Die();
         timeStartRising = Time.timeSinceLevelLoad;
         foreach (Button button in addLiquidButtons) {
             button.Disable();
@@ -140,7 +143,7 @@ public class VialPuzzle : MonoBehaviour
     }
 
     private void CompletePuzzle() {
-        Debug.Log("DONE!");
+        explosion.Explode();
     }
 
 }
