@@ -70,6 +70,7 @@ public class Arm : MonoBehaviour
     private void StartGame() {
         if (gameObject.activeSelf) {
             MenuManager.Instance.StartGame();
+            GameLogic.Instance.StartMusic();
             gameObject.SetActive(false);
         }
     }

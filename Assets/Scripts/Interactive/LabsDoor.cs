@@ -37,6 +37,7 @@ public class LabsDoor : MonoBehaviour
         GetComponent<Animator>().SetTrigger("Open");
         GetComponent<AudioSource>().clip = soundOpen;
         GetComponent<AudioSource>().Play();
+        GameLogic.Instance.StopMusic();
         timeStartClose = Time.timeSinceLevelLoad;
         opened = true;
     }

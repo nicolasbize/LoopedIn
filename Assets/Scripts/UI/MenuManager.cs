@@ -71,6 +71,7 @@ public class MenuManager : MonoBehaviour
 
     private void NewGameButton_OnClick(object sender, EventArgs e) {
         mainMenuCanvas.gameObject.SetActive(false);
+        GetComponent<AudioSource>().Stop();
         if (playIntro) {
             introCanvas.gameObject.SetActive(true);
         } else {

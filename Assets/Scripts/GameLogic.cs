@@ -54,4 +54,13 @@ public class GameLogic : MonoBehaviour
         roofToEnable.gameObject.SetActive(true);
     }
 
+    public void StartMusic() {
+        GetComponent<AudioSource>().Play();
+    }
+
+    public void StopMusic() {
+        GetComponent<AudioSource>().Stop();
+
+    }
+
 }
