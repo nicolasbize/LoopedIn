@@ -10,6 +10,10 @@ public class Keycode : BaseCodeMechanism
     public Material successColorMaterial;
     public Material failureColorMaterial;
 
+    public AudioClip clipPress;
+    public AudioClip clipSuccess;
+    public AudioClip clipFailure;
+
     private string currentSequence;
     private Material originalMaterial;
 
@@ -41,6 +45,8 @@ public class Keycode : BaseCodeMechanism
     private void OnButtonPress(object sender, Button.OnButtonPressEventArgs e) {
         if (e.value == "reset") {
             currentSequence = "";
+            GetComponent<AudioSource>().clip = clipPress;
+            GetComponent<AudioSource>().Play();
         } else if (e.value == "enter" && currentSequence.Length > 0) {
             if (currentSequence == passcode) {
                 IssueSuccessEvent();
@@ -50,15 +56,21 @@ public class Keycode : BaseCodeMechanism
                 if (stepAfterUnlock != GameLogic.GameStep.None) {
                     GameLogic.Instance.SetStep(stepAfterUnlock);
                 }
+                GetComponent<AudioSource>().clip = clipSuccess;
+                GetComponent<AudioSource>().Play();
             } else {
                 IssueErrorEvent();
                 nbPulsesLeft = 6;
                 pulseDuration = 0.2f;
                 pulseMaterial = failureColorMaterial;
+                GetComponent<AudioSource>().clip = clipFailure;
+                GetComponent<AudioSource>().Play();
             }
             currentSequence = "";
         } else {
             currentSequence += e.value;
+            GetComponent<AudioSource>().clip = clipPress;
+            GetComponent<AudioSource>().Play();
         }
     }
 }

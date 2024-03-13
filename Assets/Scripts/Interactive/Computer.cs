@@ -21,6 +21,9 @@ public class Computer : InteractiveObject {
     public ComputerAccountSO[] accounts;
 
     public bool isFree;
+    public AudioClip bootupSound;
+    public AudioClip[] keyboardSounds;
+
     private bool isTurnedOn;
     private bool isBeingUsed;
     private bool isPendingInput = false;
@@ -81,8 +84,10 @@ public class Computer : InteractiveObject {
     }
 
     private IEnumerator StartBootingSequence() {
+        GetComponent<AudioSource>().clip = bootupSound;
+        GetComponent<AudioSource>().Play();
         AddConsoleText("BOOTING TTA NETWORK OPERATING SYSTEM...");
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(3.0f);
         Clear();
         AddConsoleText("TTA OS 2.1 IS READY.");
         yield return new WaitForSeconds(0.5f);
@@ -135,6 +140,9 @@ public class Computer : InteractiveObject {
                 string finalInput = prompt + currentInput + (pressedEnter ? "" : "_");
                 consoleLines[consoleLines.Count - 1] = finalInput;
                 PrintFinalText();
+                GetComponent<AudioSource>().clip = keyboardSounds[UnityEngine.Random.Range(0, keyboardSounds.Length)];
+                GetComponent<AudioSource>().pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+                GetComponent<AudioSource>().Play();
             }
 
             if (pressedEnter && currentInput.Length > 0) {

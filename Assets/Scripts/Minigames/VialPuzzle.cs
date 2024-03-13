@@ -43,6 +43,7 @@ public class VialPuzzle : MonoBehaviour
     public void StartPuzzle() {
         isRising = true;
         timeStartRising = Time.timeSinceLevelLoad;
+        GetComponent<AudioSource>().Play();
     }
 
     private void Update() {
@@ -82,6 +83,7 @@ public class VialPuzzle : MonoBehaviour
     }
 
     private void Launch() {
+        GetComponent<AudioSource>().Play();
         isInjecting = true;
         timeStartRising = Time.timeSinceLevelLoad;
         foreach (Button button in addLiquidButtons) {

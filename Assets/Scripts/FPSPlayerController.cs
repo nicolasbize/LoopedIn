@@ -12,10 +12,14 @@ public class FPSPlayerController : MonoBehaviour {
     public Camera playerCamera;
     public float lookSpeed = 2.0f;
     public float lookXLimit = 55.0f;
+    public AudioClip[] footstepSounds;
 
-    CharacterController characterController;
-    Vector3 moveDirection = Vector3.zero;
-    float rotationX = 0;
+    private float timeBetweenSteps = 0.5f;
+    private float timeSinceLastStep = float.NegativeInfinity;
+
+    private CharacterController characterController;
+    private Vector3 moveDirection = Vector3.zero;
+    private float rotationX = 0;
 
     void Start() {
         characterController = GetComponent<CharacterController>();
@@ -54,8 +58,18 @@ public class FPSPlayerController : MonoBehaviour {
 
             if (!characterController.isGrounded) {
                 moveDirection.y -= gravity * Time.deltaTime;
+            } else { // disable jump for now
+                moveDirection.y = 0f;
             }
             characterController.Move(moveDirection * Time.deltaTime);
+
+            bool isMoving = moveDirection.magnitude > 1f;
+            float stepTime = isRunning ? (timeBetweenSteps * 0.7f) : timeBetweenSteps;
+            if (isMoving && (Time.timeSinceLevelLoad - timeSinceLastStep > stepTime)) {
+                GetComponent<AudioSource>().clip = footstepSounds[Random.Range(0, footstepSounds.Length)];
+                GetComponent<AudioSource>().Play();
+                timeSinceLastStep = Time.timeSinceLevelLoad;
+            }
         }
 
         if (Player.Instance.CanLookAround()) {

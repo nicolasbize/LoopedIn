@@ -21,13 +21,12 @@ public class Arm : MonoBehaviour
 
 
     public void Activate() {
-        // ring
-        // await 2 secs
-        Debug.Log("activating arm");
         StartCoroutine(LiftUpArm());
     }
 
     IEnumerator LiftUpArm() {
+        yield return new WaitForSeconds(1f);
+        GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(2f);
         isLifting = true;
         timeStart = Time.timeSinceLevelLoad;

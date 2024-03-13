@@ -25,6 +25,7 @@ public class TopPanel : MonoBehaviour
             overridesEnabled.Add(e.name);
             nbOverrides += 1;
             RefreshIndicators();
+            GetComponent<AudioSource>().Play();
         }
     }
 

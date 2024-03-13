@@ -29,11 +29,16 @@ public class Pickup : InteractiveObject {
 
     public override void Interact() {
         Player.Instance.PickUp(type);
+        GetComponent<AudioSource>().Play();
         if (destroyAfterPickup) {
-            Destroy(gameObject);
-        } else {
             pickedUp = true;
+            StartCoroutine(DestroyAfterSound());
         }
+    }
+
+    private IEnumerator DestroyAfterSound() {
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
     }
     
 }

@@ -29,6 +29,7 @@ public class DigitLock : InteractiveObject {
         value = (value + 1) % 10;
         textmesh.GetComponent<TextMeshProUGUI>().text = value.ToString();
         int.TryParse(gameObject.name.Split("-")[1], out digitIndex);
+        GetComponent<AudioSource>().Play();
         OnButtonPress?.Invoke(this, new OnButtonPressEventArgs() {
             value = value.ToString(),
             index = digitIndex,

@@ -55,6 +55,7 @@ MonoBehaviour:
   buttonValue: 
   keyMesh: {fileID: 1546971736810956340}
   pressedMaterial: {fileID: 0}
+  enabledMaterial: {fileID: 0}
 --- !u!65 &1393472273067520057
 BoxCollider:
   m_ObjectHideFlags: 0

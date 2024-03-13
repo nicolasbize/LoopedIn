@@ -8,11 +8,16 @@ public class Door : InteractiveObject {
     public bool isLocked = false;
     public BaseCodeMechanism lockPad;
     public GameLogic.GameStep unlockedStep;
+    public AudioClip soundOpen;
+    public AudioClip soundClose;
+    public bool autoClose = false;
+    public float autoCloseDuration = 2f;
 
     public enum State { Closed, Open}
 
     private State state = State.Closed;
     private Vector3 startRotation;
+    private float timeSinceOpened = float.NegativeInfinity;
 
     public State GetState() {
         return state;
@@ -49,6 +54,17 @@ public class Door : InteractiveObject {
     public override void Interact() {
         state = (state == State.Open) ? State.Closed : State.Open;
         transform.eulerAngles = startRotation + (state == State.Open ? Vector3.up * 90 : Vector3.zero);
+        GetComponent<AudioSource>().clip = state == State.Closed ? soundClose : soundOpen;
+        GetComponent<AudioSource>().Play();
+        if (state == State.Open) {
+            timeSinceOpened = Time.timeSinceLevelLoad;
+        }
+    }
+
+    private void Update() {
+        if (state == State.Open && autoClose && (Time.timeSinceLevelLoad - timeSinceOpened > autoCloseDuration)) {
+            Interact();
+        }
     }
 
     public override bool CanInteract() {
