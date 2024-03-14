@@ -10,7 +10,7 @@ public class Plaque : InteractiveObject
     public GameLogic.GameStep executesStep;
 
     public override string ActionName() {
-        return "read";
+        return "inspect";
     }
 
     public override bool CanInteract() {

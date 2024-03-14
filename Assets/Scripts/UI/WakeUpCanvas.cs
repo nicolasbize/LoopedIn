@@ -21,9 +21,13 @@ public class WakeUpCanvas : MonoBehaviour
     }
 
     private void Player_OnStateChange(object sender, System.EventArgs e) {
-        if (gameObject.activeSelf && Player.Instance.GetState() == Player.State.Sitting && blinked) {
-            Player.Instance.ReceiveText();
+        if (gameObject.activeSelf && blinked) {
             gameObject.SetActive(false);
+            if (GameLogic.Instance.HasFinishedGame) {
+                Player.Instance.ReceiveTextAndQuit();
+            } else if (Player.Instance.GetState() == Player.State.Sitting) {
+                Player.Instance.ReceiveText();
+            }
         }
     }
 }

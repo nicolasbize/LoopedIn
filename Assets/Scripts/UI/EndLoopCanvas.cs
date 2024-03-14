@@ -8,7 +8,8 @@ public class EndLoopCanvas : MonoBehaviour
 {
     public event EventHandler OnReadyForLoop;
     public event EventHandler OnReadyToPrepareLoop;
-    
+
+    public Explosion explosion;
     public Transform black;
     public Transform white;
 
@@ -55,6 +56,7 @@ public class EndLoopCanvas : MonoBehaviour
     }
 
     private void FinishGame() {
+        explosion.gameObject.SetActive(false);
         OnReadyForLoop?.Invoke(this, EventArgs.Empty);
     }
 

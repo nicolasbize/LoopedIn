@@ -19,6 +19,18 @@ public class Pickup : InteractiveObject {
 
     public Type type;
 
+    private new void Start() {
+        base.Start();
+        GameLogic.Instance.OnStepChange += GameLogic_OnStepChange;
+    }
+
+    private void GameLogic_OnStepChange(object sender, GameLogic.OnStepChangeEventArgs e) {
+
+        if (e.step == GameLogic.GameStep.TalkedToBoyfriend) {
+            pickedUp = false;
+        }
+    }
+
     public override string ActionName() {
         return actionName;
     }

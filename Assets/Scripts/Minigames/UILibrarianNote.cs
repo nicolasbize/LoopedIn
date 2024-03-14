@@ -17,7 +17,7 @@ public class UILibrarianNote : MonoBehaviour
 
     private void Player_OnLibrarianNotePickup(object sender, System.EventArgs e) {
         noteTransform.gameObject.SetActive(true);
-        Player.Instance.StartThinking(thought);
+        Player.Instance.StartThinking(thought, Player.State.Moving);
     }
 
     private void Player_OnStateChange(object sender, System.EventArgs e) {

@@ -32,9 +32,9 @@ public class DiaryPuzzle : MonoBehaviour
         for (int i = 0; i < alphabet.Length; i++) {
             encoding.Add(alphabet[i], encodedAlphabet[i]);
         }
-
+        
         PlaceLetters(leftPage, 180, -80);
-        PlaceLetters(rightPage, 920, -80);
+        PlaceLetters(rightPage, Screen.width / 2 + 80, -80);
     }
 
     private void PlaceLetters(string page, int leftOffset, int topOffset) {

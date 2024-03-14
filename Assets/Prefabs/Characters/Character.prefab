@@ -195,7 +195,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Hello, welcome to another episode
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 498a5099def9c644caed308227089061, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b9f54a854021bbf40997b1611f82d1ee, type: 2}
   m_sharedMaterial: {fileID: 422113877125530419, guid: 498a5099def9c644caed308227089061,
     type: 2}
   m_fontSharedMaterials: []
@@ -260,7 +260,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &955243423685549365
@@ -504,7 +504,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3389556993852997001}
   m_LocalRotation: {x: -0.0000000015401997, y: -0.9991673, z: -0.00000003771752, w: -0.04080113}
-  m_LocalPosition: {x: 0, y: 0, z: 0.0015}
+  m_LocalPosition: {x: 0, y: 0, z: 0.0064999997}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 1
   m_Children:

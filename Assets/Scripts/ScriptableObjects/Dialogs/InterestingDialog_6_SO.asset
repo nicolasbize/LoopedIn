@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e918091226193bd4bb98c14667fa94ff, type: 3}
+  m_Name: InterestingDialog_6_SO
+  m_EditorClassIdentifier: 
+  greeting: What's on your mind?
+  branches:
+  - question: Every ripple we create in the past has consequences for the future
+    currentStepRequirement: 0
+    stepUnlocked: 0
+    response: Sure, so what?
+    branches:
+    - question: Are we the architects of fate or just its prisoners?
+      currentStepRequirement: 0
+      stepUnlocked: 0
+      response: Hmm maybe we're just the janitors here cleaning up the mess
+      branches: []

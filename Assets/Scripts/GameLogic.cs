@@ -12,6 +12,7 @@ public class GameLogic : MonoBehaviour
     }
 
     public Transform roofToEnable;
+    public bool HasFinishedGame {  get; private set; }
 
     public static GameLogic Instance;
 
@@ -31,7 +32,13 @@ public class GameLogic : MonoBehaviour
         OpenedSecretLibraryRoom,
         AccessedSecretComputer,
         RetrievedIDCard,
-
+        TalkedToBoyfriend,
+        FoundTrashNote,
+        ReadJerryLeeCrumbledPaper,
+        AccessedLab,
+        FoundMillerPasswordHint,
+        FoundInjectionProcedure,
+        StartedVialPuzzle,
     }
 
     public GameStep Step { get; private set; }
@@ -42,7 +49,6 @@ public class GameLogic : MonoBehaviour
 
     public void SetStep(GameStep step) {
         this.Step = step;
-        Debug.Log(step.ToString());
         OnStepChange?.Invoke(this, new OnStepChangeEventArgs() {
             step = this.Step
         });
@@ -62,5 +68,11 @@ public class GameLogic : MonoBehaviour
         GetComponent<AudioSource>().Stop();
 
     }
+
+    public void FinishGame() {
+        HasFinishedGame = true;
+    }
+
+
 
 }

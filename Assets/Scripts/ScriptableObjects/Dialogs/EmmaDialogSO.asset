@@ -17,7 +17,7 @@ MonoBehaviour:
   - question: Hi! Lucy gave me the code and said I could hang out here!
     currentStepRequirement: 0
     stepUnlocked: 0
-    response: Oh that's cool. My name is Emma, Chief Scientist.
+    response: Nice to meet you, I'm Dr. Emma Stoned.
     branches:
     - question: Nice to meet you! This is a sweet spot!
       currentStepRequirement: 0

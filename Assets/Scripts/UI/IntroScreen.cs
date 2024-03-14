@@ -9,6 +9,7 @@ public class IntroScreen : MonoBehaviour
 
     public Transform[] introPages;
     public TypedText[] introTexts;
+    public Transform dateText;
 
     private int currentPageIndex = -1;
 
@@ -21,7 +22,7 @@ public class IntroScreen : MonoBehaviour
             t.OnComplete += Text_OnComplete;
             t.OnType += Text_OnType;
         }
-
+        dateText.gameObject.SetActive(false);
         currentPageIndex = introPages.Length;
         ShowNextPage();
     }
@@ -42,8 +43,13 @@ public class IntroScreen : MonoBehaviour
             introPages[currentPageIndex].gameObject.SetActive(true);
             introTexts[currentPageIndex].StartTyping();
         } else {
-            OnIntroComplete?.Invoke(this, EventArgs.Empty);
+            StartCoroutine(ShowDateAndStart());
         }
     }
 
+    IEnumerator ShowDateAndStart() {
+        dateText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(4f);
+        OnIntroComplete?.Invoke(this, EventArgs.Empty);
+    }
 }

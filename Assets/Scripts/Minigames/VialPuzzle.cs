@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,13 +8,14 @@ using UnityEngine;
 
 public class VialPuzzle : MonoBehaviour
 {
+    public event EventHandler OnLaunch;
+
     public Transform rootLiquid;
     public LiquidDispenser[] liquidDispensers;
     public Button[] addLiquidButtons;
     public Button resetButton;
     public Button administerButton;
     public Transform liquidPrefab;
-    public Explosion explosion;
 
     private List<VialLiquid> currentLiquids = new List<VialLiquid>();
     
@@ -31,7 +33,6 @@ public class VialPuzzle : MonoBehaviour
         }
         resetButton.OnButtonPress += ResetButton_OnButtonPress;
         administerButton.OnButtonPress += AdministerButton_OnButtonPress;
-            administerButton.Enable();
     }
 
     private void AdministerButton_OnButtonPress(object sender, Button.OnButtonPressEventArgs e) {
@@ -45,6 +46,7 @@ public class VialPuzzle : MonoBehaviour
     public void StartPuzzle() {
         isRising = true;
         timeStartRising = Time.timeSinceLevelLoad;
+        GameLogic.Instance.SetStep(GameLogic.GameStep.StartedVialPuzzle);
         GetComponent<AudioSource>().Play();
     }
 
@@ -67,7 +69,6 @@ public class VialPuzzle : MonoBehaviour
                 transform.localPosition = new Vector3(transform.localPosition.x, y, transform.position.z);
             } else {
                 isInjecting = false;
-                CompletePuzzle();
             }
         }
     }
@@ -87,7 +88,9 @@ public class VialPuzzle : MonoBehaviour
     private void Launch() {
         GetComponent<AudioSource>().Play();
         isInjecting = true;
+        GameLogic.Instance.StopMusic();
         Player.Instance.Die();
+        OnLaunch?.Invoke(this, EventArgs.Empty);
         timeStartRising = Time.timeSinceLevelLoad;
         foreach (Button button in addLiquidButtons) {
             button.Disable();
@@ -142,8 +145,5 @@ public class VialPuzzle : MonoBehaviour
         }
     }
 
-    private void CompletePuzzle() {
-        explosion.Explode();
-    }
 
 }

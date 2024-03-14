@@ -32,7 +32,7 @@ MonoBehaviour:
       branches:
       - question: How do I get to that break room?
         currentStepRequirement: 0
-        stepUnlocked: 0
+        stepUnlocked: 14
         response: No clue haha! Lucy left me a note but it was confusing, I threw
           it in the trash
         branches: []

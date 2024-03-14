@@ -21,6 +21,8 @@ public class Arm : MonoBehaviour
 
 
     public void Activate() {
+        GameLogic.Instance.StartMusic();
+        GameLogic.Instance.SetStep(GameLogic.GameStep.ReceivedWakeUpCall);
         StartCoroutine(LiftUpArm());
     }
 
@@ -70,7 +72,6 @@ public class Arm : MonoBehaviour
     private void StartGame() {
         if (gameObject.activeSelf) {
             MenuManager.Instance.StartGame();
-            GameLogic.Instance.StartMusic();
             gameObject.SetActive(false);
         }
     }

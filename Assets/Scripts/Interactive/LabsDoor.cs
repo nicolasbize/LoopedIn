@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,11 +14,12 @@ public class LabsDoor : MonoBehaviour
     private float timeStartClose = float.NegativeInfinity;
     private bool opened = false;
 
+    public event EventHandler OnClose;
+
     void Start()
     {
         doorButton.OnButtonPress += DoorButton_OnButtonPress;
         Player.Instance.OnPassPickup += Player_OnPassPickup;
-        doorButton.Enable();
     }
 
     private void Player_OnPassPickup(object sender, System.EventArgs e) {
@@ -27,6 +29,7 @@ public class LabsDoor : MonoBehaviour
     private void Update() {
         if (opened && (Time.timeSinceLevelLoad - timeStartClose) > timeAutoClose) {
             opened = false;
+            OnClose?.Invoke(this, EventArgs.Empty);
             GetComponent<Animator>().SetTrigger("Close");
             GetComponent<AudioSource>().clip = soundClose;
             GetComponent<AudioSource>().Play();
@@ -37,7 +40,7 @@ public class LabsDoor : MonoBehaviour
         GetComponent<Animator>().SetTrigger("Open");
         GetComponent<AudioSource>().clip = soundOpen;
         GetComponent<AudioSource>().Play();
-        GameLogic.Instance.StopMusic();
+        GameLogic.Instance.SetStep(GameLogic.GameStep.AccessedLab);
         timeStartClose = Time.timeSinceLevelLoad;
         opened = true;
     }

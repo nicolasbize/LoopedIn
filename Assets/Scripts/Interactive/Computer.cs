@@ -103,7 +103,7 @@ public class Computer : InteractiveObject {
         username = "";
         password = "";
         AddConsoleText("");
-        AddConsoleText("USERNAME:");
+        AddConsoleText("FULL NAME:");
         StartInput(false);
     }
 

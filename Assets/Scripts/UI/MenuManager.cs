@@ -11,6 +11,7 @@ public class MenuManager : MonoBehaviour
     public IntroScreen introCanvas;
     public WakeUpCanvas wakeUpCanvas;
     public EndLoopCanvas endLoopCanvas;
+    public Credits  creditsCanvas;
 
     public bool playLogos;
     public bool playIntro;
@@ -53,6 +54,7 @@ public class MenuManager : MonoBehaviour
         introCanvas.gameObject.SetActive(false);
         wakeUpCanvas.gameObject.SetActive(false);
         endLoopCanvas.gameObject.SetActive(false);
+        creditsCanvas.gameObject.SetActive(false);
         if (playLogos) {
             logoCanvas.gameObject.SetActive(true);
         } else {
@@ -60,17 +62,23 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    public void FadeOutAndCredits() {
+        creditsCanvas.gameObject.SetActive(true);
+    }
+
     private void EndLoopCanvas_OnReadyToPrepareLoop(object sender, EventArgs e) {
-        Debug.Log("Reposition player at restart with watch");
+        Debug.Log("Ready to prepare loop");
         Player.Instance.ResetToOriginalTransform();
         InMenu = true; // prevent moving
         endLoopCanvas.RestartGame();
     }
 
     private void EndLoopCanvas_OnReadyForLoop(object sender, EventArgs e) {
+        Debug.Log("OnReadyForLoop");
         endLoopCanvas.gameObject.SetActive(false);
         wakeUpCanvas.gameObject.SetActive(true);
         wakeUpCanvas.GetComponent<Animator>().Play("WakeUp");
+
     }
 
     private void OnIntroComplete(object sender, EventArgs e) {
