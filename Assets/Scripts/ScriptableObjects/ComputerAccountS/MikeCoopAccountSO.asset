@@ -16,20 +16,20 @@ MonoBehaviour:
   password: SPARTACUS
   elevated: 1
   emails:
-  - topic: It can work!
-    from: tom@tta.org
-    to: mike@tta.org
-    date: Feb 01, 1993, 4:24PM
-    executeStep: 18
-    body: "I got it! I finally got the math\nto work out! I can't believe it!\nI'm
-      going to surprise Lucy tonight!\nWe're all going out for her \nbirthday right?
-      Can't believe she\njust turned 50 today!"
   - topic: Experiment #7 ready
     from: lucy@tta.org
     to: mike@tta.org
-    date: Feb 11, 1993, 12:12PM
+    date: Feb 11 1993, 12:12PM
     executeStep: 0
     body: "Mike, we're moving forward with\nexperiment #7 tomorrow. We \nhave a fresh
       brain, the execs will\npull the trigger sometime\nduring the day tomorrow!\nWe're
       about to make history!\nHurry and leave the premises.\nYay for science! Stay
       safe!"
+  - topic: It can work!
+    from: tom@tta.org
+    to: mike@tta.org
+    date: Feb 01 1993, 4:24PM
+    executeStep: 18
+    body: "I got it! I finally got the math\nto work out! I can't believe it!\nI'm
+      going to surprise Lucy tonight!\nWe're all going out for her \nbirthday right?
+      Can't believe she\njust turned 50 today!"

@@ -187,7 +187,8 @@ public class Computer : InteractiveObject {
                     "---------------",
                 };
                 for (int i = 0; i < authenticatedAccount.emails.Length; i++) {
-                    inbox.Add((i + 1).ToString() + ". " + authenticatedAccount.emails[i].topic);
+                    string d = authenticatedAccount.emails[i].date.Split(",")[0];
+                    inbox.Add((i + 1).ToString() + ". " + d + " " + authenticatedAccount.emails[i].topic);
                 }
                 StartCoroutine(SystemResponse(inbox));
             } else if (currentInput.Trim().ToUpper() == "LOGOUT") {

@@ -85,6 +85,58 @@ public class Player : MonoBehaviour
         if (e.step == GameLogic.GameStep.GotLockerCombination) {
             StartThinking("Looks like this Jay might have found something interesting...");
         }
+
+        // update hints
+        switch (GameLogic.Instance.Step) {
+            case GameLogic.GameStep.ReceivedWakeUpCall:
+                HintManager.Instance.UpdateHint("The text I received mentioned a way to identify my target in the bathroom stall. I should head there.");
+                break;
+            case GameLogic.GameStep.SolvedBriefcaseClue:
+                HintManager.Instance.UpdateHint("I need to find a smiling face around here...");
+                break;
+            case GameLogic.GameStep.FoundMillerPortrait:
+                HintManager.Instance.UpdateHint("I should ask around in the hallway if anyone knows my target Dr Miller");
+                break;
+            case GameLogic.GameStep.TalkedToBoyfriend:
+                HintManager.Instance.UpdateHint("I should check in the trash to find the code to the break room.");
+                break;
+            case GameLogic.GameStep.OpenedPlayroom:
+                HintManager.Instance.UpdateHint("I should talk with people inside to get information about Dr Miller.");
+                break;
+            case GameLogic.GameStep.CompletedEmmaConversation:
+                HintManager.Instance.UpdateHint("I should pay attention to the current conversation between Emma and the IT guy...");
+                break;
+            case GameLogic.GameStep.HeardWeakPassword:
+                HintManager.Instance.UpdateHint("Looks like Emma Stoned is using the default password PASSWORD123.");
+                break;
+            case GameLogic.GameStep.GotLockerCombination:
+                HintManager.Instance.UpdateHint("I should check Jay's locker in the men's bathroom. 5th one, code is 4827.");
+                break;
+            case GameLogic.GameStep.BrokeDiaryCode:
+                HintManager.Instance.UpdateHint("I should go into the library to find that hidden room. Jay mentioned to tally the blue, red and green.");
+                break;
+            case GameLogic.GameStep.OpenedSecretLibraryRoom:
+                HintManager.Instance.UpdateHint("I should try to find the librarian's full name and password to access their account.");
+                break;
+            case GameLogic.GameStep.AccessedSecretComputer:
+                HintManager.Instance.UpdateHint("I should go find the lab facility pass. Girls' middle locker, code 8453.");
+                break;
+            case GameLogic.GameStep.AccessedLab:
+                HintManager.Instance.UpdateHint("I should check the facility for clues.");
+                break;
+            case GameLogic.GameStep.FoundMillerPasswordHint:
+                HintManager.Instance.UpdateHint("Dr Miller turned 50 on Feb 01 1993, that should help me find the password.");
+                break;
+            case GameLogic.GameStep.FoundInjectionProcedure:
+                HintManager.Instance.UpdateHint("I should type the command OVERRIDE INJECT on each computer.");
+                break;
+            case GameLogic.GameStep.StartedVialPuzzle:
+                HintManager.Instance.UpdateHint("Looks like the vial already has some content. I need to match the ratios.");
+                break;
+            default:
+                break;
+        }
+
     }
 
     public State GetState() {
@@ -149,20 +201,25 @@ public class Player : MonoBehaviour
     public void PickUp(Pickup.Type type) {
         if (type == Pickup.Type.Pass) {
             StartThinking("Time to find out what Dr Miller has been doing and undo it!");
+            HintManager.Instance.UpdateHint("I should be able to access the lab facility now.");
             OnPassPickup?.Invoke(this, EventArgs.Empty);
             return;
         }
 
         if (type == Pickup.Type.Briefcase) {
             OnStartSmilePuzzle?.Invoke(this, EventArgs.Empty);
+            HintManager.Instance.UpdateHint("Looks like a puzzle around letters... Press H for a hint!");
         } else if (type == Pickup.Type.PlayroomCodePuzzle) {
             OnStartPlayroomPuzzle?.Invoke(this, EventArgs.Empty);
             GameLogic.Instance.SetStep(GameLogic.GameStep.FoundTrashNote);
+            HintManager.Instance.UpdateHint("Looks like I need to find a 6 digit number... Press H for a hint!");
         } else if (type == Pickup.Type.Diary) {
             OnStartDiaryPuzzle?.Invoke(this, EventArgs.Empty);
+            HintManager.Instance.UpdateHint("Looks like I need to swap letters to decode Jay's journal... Press H for a hint!");
         } else if (type == Pickup.Type.ScrambledLibraryNote) {
             OnLibrarianNotePickup?.Invoke(this, EventArgs.Empty);
             GameLogic.Instance.SetStep(GameLogic.GameStep.ReadJerryLeeCrumbledPaper);
+            HintManager.Instance.UpdateHint("Looks like I can guess the librarian's password... Press H for a hint!");
         }
         SetState(State.Puzzling);
     }
@@ -179,7 +236,6 @@ public class Player : MonoBehaviour
 
     public void CompleteDiaryPuzzle() {
         GameLogic.Instance.SetStep(GameLogic.GameStep.BrokeDiaryCode);
-        
     }
 
     public void StartThinking(string thought, State overrideReturnState = State.None) {
@@ -200,86 +256,26 @@ public class Player : MonoBehaviour
     }
 
     private void Update() {
-        if(CanReceiveHint() && Input.GetKeyDown(KeyCode.F1)) {
+        if(state == State.Puzzling && Input.GetKeyDown(KeyCode.H)) {
             ShowTip();
         }
-    }
-
-    private bool CanReceiveHint() {
-        return state == State.Moving || state == State.Puzzling;
     }
 
     private void ShowTip() {
         switch(GameLogic.Instance.Step) {
             case GameLogic.GameStep.ReceivedWakeUpCall:
-                if (state == State.Puzzling) {
-                    StartThinking("Looks like the letter S is in sock but not in moon...");
-                } else {
-                    StartThinking("The text said I should check the bathroom stall to identify my target...");
-                }
-                break;
-            case GameLogic.GameStep.SolvedBriefcaseClue:
-                StartThinking("I should inspect the paintings on the wall and find the person who smiles.");
-                break;
-            case GameLogic.GameStep.FoundMillerPortrait:
-                StartThinking("I should try to find someone in the hallway that knows Dr Miller.");
-                break;
-            case GameLogic.GameStep.TalkedToBoyfriend:
-                StartThinking("I should check the trash to find Dr Miller's note to access the break room.");
+                StartThinking("Looks like the letter S is in sock but not in clock... I should select all the letters that are in the first word but not in the second.");
                 break;
             case GameLogic.GameStep.FoundTrashNote:
-                if (state == State.Puzzling) {
-                    StartThinking("Each orange weight seems to be 10lbs, so the green ones must weight 25lbs each. The code should map to green-orange-green.");
-                } else {
-                    StartThinking("I should check Dr Miller's note again to find the code to the break room.");
-                }
-                break;
-            case GameLogic.GameStep.OpenedPlayroom:
-                StartThinking("I should try to find one of Dr Miller's friends in the break room.");
-                break;
-            case GameLogic.GameStep.CompletedEmmaConversation:
-            case GameLogic.GameStep.HeardWeakPassword:
-                StartThinking("Once I have that person's full name, I can access her computer account using the default PASSWORD123.");
-                break;
-            case GameLogic.GameStep.MappedStonedPortrait:
-                StartThinking("Emma Stoned, PASSWORD123. Let's access her account.");
-                break;
-            case GameLogic.GameStep.GotLockerCombination:
-                StartThinking("I should check Jay's locker. 5th one, code is 4827.");
+                StartThinking("I'm looking for a 6 digit number. 3 orange weights equal 30lbs, so if I find the green weight the combination is green-orange-green.");
                 break;
             case GameLogic.GameStep.OpenedLocker:
-                StartThinking("I need to understand Jay's journal. Looks like it starts with a date...");
-                break;
-            case GameLogic.GameStep.BrokeDiaryCode:
-                StartThinking("Jay's diary said to count the blue, red and green to find the code in the library.");
-                break;
-            case GameLogic.GameStep.OpenedSecretLibraryRoom:
-                StartThinking("I've got to find the user name and password.");
+                StartThinking("Looks like the pages start with a date, I should try to find a day and a month.");
                 break;
             case GameLogic.GameStep.ReadJerryLeeCrumbledPaper:
                 StartThinking("They've been here for 2 years, and change the default password PASSWORD123 every month.");
                 break;
-            case GameLogic.GameStep.AccessedSecretComputer:
-                StartThinking("Looks like a lab pass is hidden in the girls middle locker. Code is 8453.");
-                break;
-            case GameLogic.GameStep.RetrievedIDCard:
-                StartThinking("Now that I have the pass, I should head over to the lab.");
-                break;
-            case GameLogic.GameStep.AccessedLab:
-                StartThinking("I should check the desks for clues on names and passwords.");
-                break;
-            case GameLogic.GameStep.FoundMillerPasswordHint:
-                StartThinking("Mike mentioned Dr Miller's 50th birthday in an email dating from Feb 1st 1993. I should try Miller's birthday as password.");
-                break;
-            case GameLogic.GameStep.FoundInjectionProcedure:
-                StartThinking("Looks like the 4 users need to enter the command OVERRIDE INJECT");
-                break;
-            case GameLogic.GameStep.StartedVialPuzzle:
-                StartThinking("The formula on the board should break whatever is going on. I need to match the ratio. ");
-                break;
             default:
-                Debug.Log("could not find step to help with");
-                Debug.Log(GameLogic.Instance.Step);
                 break;
         }
     }

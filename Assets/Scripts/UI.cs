@@ -15,7 +15,6 @@ public class UI : MonoBehaviour
     public Transform responsePanel;
     public Transform thoughtPanel;
     public Transform thoughtText;
-    public Canvas inGameCanvas;
 
     private bool isNpcTalking;
     private bool isPlayerResponding;

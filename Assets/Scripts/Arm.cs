@@ -72,6 +72,7 @@ public class Arm : MonoBehaviour
     private void StartGame() {
         if (gameObject.activeSelf) {
             MenuManager.Instance.StartGame();
+            HintManager.Instance.Show();
             gameObject.SetActive(false);
         }
     }

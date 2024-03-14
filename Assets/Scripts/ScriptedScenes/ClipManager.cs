@@ -37,6 +37,9 @@ public class ClipManager : MonoBehaviour
         foreach (Character character in charactersInvolved) {
             character.Unlock();
         }
+        if (executesStep != GameLogic.GameStep.None) {
+            GameLogic.Instance.SetStep(executesStep);
+        }
     }
 
     private void PlayNextStep() {

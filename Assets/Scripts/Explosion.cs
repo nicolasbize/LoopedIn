@@ -20,6 +20,7 @@ public class Explosion : MonoBehaviour
         timeStart = Time.timeSinceLevelLoad;
         isExploding = true;
         GetComponent<AudioSource>().Play();
+        HintManager.Instance.Hide();
     }
 
     private void Update() {

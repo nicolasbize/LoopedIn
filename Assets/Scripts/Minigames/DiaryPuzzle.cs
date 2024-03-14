@@ -34,7 +34,7 @@ public class DiaryPuzzle : MonoBehaviour
         }
         
         PlaceLetters(leftPage, 180, -80);
-        PlaceLetters(rightPage, Screen.width / 2 + 80, -80);
+        PlaceLetters(rightPage, 980, -80);
     }
 
     private void PlaceLetters(string page, int leftOffset, int topOffset) {

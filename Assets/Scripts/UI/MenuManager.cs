@@ -11,7 +11,8 @@ public class MenuManager : MonoBehaviour
     public IntroScreen introCanvas;
     public WakeUpCanvas wakeUpCanvas;
     public EndLoopCanvas endLoopCanvas;
-    public Credits  creditsCanvas;
+    public Credits creditsCanvas;
+    public Canvas cursorCanvas;
 
     public bool playLogos;
     public bool playIntro;
@@ -55,6 +56,7 @@ public class MenuManager : MonoBehaviour
         wakeUpCanvas.gameObject.SetActive(false);
         endLoopCanvas.gameObject.SetActive(false);
         creditsCanvas.gameObject.SetActive(false);
+        cursorCanvas.gameObject.SetActive(false);
         if (playLogos) {
             logoCanvas.gameObject.SetActive(true);
         } else {
@@ -84,6 +86,7 @@ public class MenuManager : MonoBehaviour
     private void OnIntroComplete(object sender, EventArgs e) {
         introCanvas.gameObject.SetActive(false);
         wakeUpCanvas.gameObject.SetActive(true);
+        cursorCanvas.gameObject.SetActive(true);
     }
 
     private void OnLogosComplete(object sender, EventArgs e) {

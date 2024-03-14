@@ -19,7 +19,7 @@ MonoBehaviour:
   - topic: Extracting Jay
     from: jane@tta.org
     to: jerry@tta.org
-    date: Feb 10, 1993, 6:43PM
+    date: Feb 10 1993, 6:43PM
     executeStep: 0
     body: 'Jerry, we need to pull Jay B.
 
@@ -39,7 +39,7 @@ MonoBehaviour:
   - topic: Experiment #7
     from: mike@tta.org
     to: jerry@tta.org
-    date: Feb 10, 1993, 1:03AM
+    date: Feb 10 1993, 1:03AM
     executeStep: 0
     body: 'After much research, I''m
 
@@ -61,7 +61,7 @@ MonoBehaviour:
   - topic: New pass
     from: lucy@tta.org
     to: jerry@tta.org
-    date: Feb 09, 1993, 11:52AM
+    date: Feb 09 1993, 11:52AM
     executeStep: 12
     body: 'Jerry I created a new level 3
 

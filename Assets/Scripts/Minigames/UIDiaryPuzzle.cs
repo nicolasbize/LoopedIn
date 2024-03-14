@@ -21,7 +21,7 @@ public class UIDiaryPuzzle : MonoBehaviour
 
     private void Player_OnStateChange(object sender, System.EventArgs e) {
         // we get here after thinking out loud, but without having closed the clue
-        if (Player.Instance.GetState() == Player.State.Moving && completed) {
+        if (Player.Instance.GetState() == Player.State.Moving && completed && diaryCanvas.gameObject.activeSelf) {
             diaryCanvas.gameObject.SetActive(false);
             Player.Instance.CompleteDiaryPuzzle();
         }

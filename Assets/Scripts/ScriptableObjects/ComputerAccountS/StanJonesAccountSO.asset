@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: StanJonesAccountSO
   m_EditorClassIdentifier: 
   username: STAN JONES
-  password: HARVARD
+  password: HARVARD1978
   elevated: 1
   emails:
   - topic: Unstable experimentation
     from: mike@tta.org
     to: stan@tta.org
-    date: Feb 05, 1993, 1:10PM
+    date: Feb 05 1993, 1:10PM
     executeStep: 0
     body: 'Be careful not to inject a quota
 
@@ -37,7 +37,7 @@ MonoBehaviour:
   - topic: Patients being alive
     from: lucy@tta.org
     to: stan@tta.org
-    date: Dec 05, 1992, 1:17AM
+    date: Dec 05 1992, 1:17AM
     executeStep: 0
     body: "I've given a lot of thought to what\nyou mentioned this morning, and\nI
       think we should move forward\nwith live patients. I know it's a\ndifficult
@@ -46,7 +46,7 @@ MonoBehaviour:
   - topic: The brain is the key
     from: lucy@tta.org
     to: stan@tta.org
-    date: Sep 05, 1992, 3:53AM
+    date: Sep 05 1992, 3:53AM
     executeStep: 0
     body: 'Stan, how fast can you get the brain
 

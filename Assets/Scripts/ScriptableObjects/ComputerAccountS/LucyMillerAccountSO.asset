@@ -16,10 +16,17 @@ MonoBehaviour:
   password: 02011943
   elevated: 1
   emails:
+  - topic: A problem and a solution
+    from: jane@tta.org
+    to: lucy@tta.org
+    date: Feb 10 1993, 11:43AM
+    executeStep: 0
+    body: "I know you were looking\nfor someone new, I think\nI found the perfect
+      person.\nI'll get him up and ready for \nsurgery tomorrow,"
   - topic: Let's hang out!
     from: emma@tta.org
     to: lucy@tta.org
-    date: Feb 09, 1993
+    date: Feb 09 1993, 2:56PM
     executeStep: 0
     body: 'Hey Lucy,
 
@@ -34,17 +41,10 @@ MonoBehaviour:
       jealous
 
       you''ll get your turn haha'
-  - topic: A problem and a solution
-    from: jane@tta.org
-    to: lucy@tta.org
-    date: Feb 10, 1993
-    executeStep: 0
-    body: "I know you were looking\nfor someone new, I think\nI found the perfect
-      person.\nI'll get him up and ready for \nsurgery tomorrow,"
   - topic: Issue with password
     from: tom@tta.org
     to: lucy@tta.org
-    date: Jan 05, 1993
+    date: Jan 05 1993, 1:15PM
     executeStep: 0
     body: 'Hey Lucy what did you do
 
@@ -62,7 +62,7 @@ MonoBehaviour:
   - topic: The perfect experiment
     from: tom@tta.org
     to: lucy@tta.org
-    date: Oct 11, 1992
+    date: Oct 11 1992, 6:34AM
     executeStep: 0
     body: 'The perfect experiment occurs
 

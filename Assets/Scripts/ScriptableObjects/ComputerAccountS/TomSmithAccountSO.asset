@@ -19,7 +19,7 @@ MonoBehaviour:
   - topic: Safety switch
     from: lucy@tta.org
     to: tom@tta.org
-    date: Jan 05, 1993, 09:21AM
+    date: Jan 05 1993, 09:21AM
     executeStep: 19
     body: 'Given the issue that happened
 
@@ -35,14 +35,14 @@ MonoBehaviour:
 
       The command is hidden by default,
 
-      you''ll
-      need to type the following:
+      we
+      will all need to type the following:
 
       OVERRIDE INJECT'
   - topic: A better future
     from: mike@tta.org
     to: tom@tta.org
-    date: Feb 08, 1993, 11:28AM
+    date: Feb 08 1993, 11:28AM
     executeStep: 0
     body: 'Can you imagine a future where
 

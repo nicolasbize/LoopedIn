@@ -9,7 +9,6 @@ public class SmileLetter : MonoBehaviour
     public Transform letterBackground;
     public Transform letterPrefab;
     [TextArea] public string hint;
-    public Transform resetButton;
 
     private List<HighlightableLetter> letters = new List<HighlightableLetter>();
 
@@ -31,7 +30,6 @@ public class SmileLetter : MonoBehaviour
                 letter.OnLetterSelect += Letter_OnLetterSelect;
             }
         }
-        resetButton.GetComponent<ResetButton>().OnResetClick += SmileLetter_OnResetClick;
     }
 
     private void Letter_OnLetterSelect(object sender, System.EventArgs e) {
@@ -53,9 +51,4 @@ public class SmileLetter : MonoBehaviour
         return foundSolution;
     }
 
-    private void SmileLetter_OnResetClick(object sender, System.EventArgs e) {
-        foreach(HighlightableLetter letter in letters) {
-            letter.SetInactive();
-        }
-    }
 }
